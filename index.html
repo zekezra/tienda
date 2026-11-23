@@ -529,7 +529,7 @@ body.has-cart .inst,body.pv-open .inst{display:none}
 </style>
 
 <script>window.__VITRINA=true</script>
-<div class="annc"><span class="win"><span class="rot"><span>Venta · dom 29 nov y jue 3 dic</span><span>Saco o pantalón: cómpralos por separado</span><span>Muy pronto: aparta en línea</span><span>Ciudad de México · atención por WhatsApp</span></span></span></div>
+<div class="annc"><span class="win"><span class="rot"><span>Venta · dom 29 nov y jue 3 dic</span><span>Puedes comprar solo el saco o solo el pantalón</span><span>Muy pronto: aparta en línea</span><span>Ciudad de México · atención por WhatsApp</span></span></span></div>
 <header class="shead"><div class="in">
   <button class="ib menu-b" type="button" id="menu-b" aria-label="Menú"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h18"/></svg></button>
   <nav class="snav" aria-label="Secciones"><a href="#nuevo">Novedades</a><a href="#tienda" data-go="saco">Sacos</a><a href="#tienda" data-go="pantalon">Pantalones</a><a href="#tienda" data-go="nino">Niño</a></nav>
@@ -582,7 +582,7 @@ body.has-cart .inst,body.pv-open .inst{display:none}
   </section>
   <div class="perks">
     <div><b>Tela stretch</b><span>86% rayón, 14% spandex. Cómodo todo el día.</span></div>
-    <div><b>Saco o pantalón</b><span>Se venden por separado: arma tu traje con la talla exacta de cada pieza.</span></div>
+    <div><b>Solo saco o solo pantalón</b><span>No tienes que llevar el traje completo: compra solo la pieza que necesitas.</span></div>
     <div><b>Cambios 30 días</b><span>Cambio de talla con etiquetas.</span></div>
     <div><b>Atención directa</b><span>Pregúntanos por WhatsApp tu talla y color.</span></div>
   </div>
@@ -1021,7 +1021,7 @@ render(); syncHash();
     const info=document.querySelector('#pv .pv-info'); if(!info||openI==null) return;
     const g=DATA[openI]; if(g.traje||info.querySelector('.sep')) return;
     const pr=info.querySelector('.price'); if(!pr) return;
-    const txt=g.cat==='pantalon'?'Se vende por separado. Combínalo con el saco de tu talla para armar tu traje.':'Se vende por separado. Combínalo con el pantalón de tu talla para armar tu traje.';
+    const txt=g.cat==='pantalon'?'Puedes comprar solo el pantalón, sin el saco.':'Puedes comprar solo el saco, sin el pantalón.';
     pr.insertAdjacentHTML('afterend','<p class="sep">'+txt+'</p>');
   };
 })();
