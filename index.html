@@ -286,9 +286,9 @@ body{font-family:var(--f-display);font-weight:400;font-size:15.5px;letter-spacin
 /* anuncio + encabezado */
 .annc{background:#141414;color:#eeebe5;text-align:center;font:400 12px/1 var(--f-display);letter-spacing:.16em;text-transform:uppercase;padding:10px 12px;overflow:hidden;white-space:nowrap}
 .annc .win{display:inline-block;height:1.2em;overflow:hidden;vertical-align:top}
-.annc .rot{display:inline-block;animation:annc 15s infinite}
+.annc .rot{display:inline-block;animation:annc 18s infinite}
 .annc .rot span{display:block;height:1.2em}
-@keyframes annc{0%,30%{transform:translateY(0)}33%,63%{transform:translateY(-1.2em)}66%,96%{transform:translateY(-2.4em)}100%{transform:translateY(0)}}
+@keyframes annc{0%,22%{transform:translateY(0)}25%,47%{transform:translateY(-1.2em)}50%,72%{transform:translateY(-2.4em)}75%,97%{transform:translateY(-3.6em)}100%{transform:translateY(0)}}
 @media (prefers-reduced-motion:reduce){.annc .rot{animation:none}}
 .shead{position:sticky;top:0;z-index:25;background:rgba(255,255,255,.96);backdrop-filter:saturate(1.2) blur(8px);border-bottom:1px solid var(--line)}
 .shead .in{max-width:1320px;margin:0 auto;height:66px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 max(20px,env(safe-area-inset-left,0px))}
@@ -510,6 +510,16 @@ body.has-cart .inst,body.pv-open .inst{display:none}
 .sg-foot b{font-weight:500;color:var(--ink)}
 .sg-link{background:none;border:0;padding:0;color:var(--ink);font:500 11px var(--f-display);letter-spacing:.16em;text-transform:uppercase;border-bottom:1px solid var(--ink);cursor:pointer;margin-left:10px}
 .try{margin:0;font-size:13.5px;line-height:1.45;color:#55514a}
+.sale{background:#0e0e0e;color:#f5f1ea;text-align:center;padding:64px 20px 70px;display:flex;flex-direction:column;align-items:center;gap:18px}
+.sale h2{margin:0;font:400 clamp(44px,6vw,76px)/1 var(--serif);color:#fff}
+.sale h2 i{font-style:italic}
+.sale .days{display:grid;grid-template-columns:repeat(2,minmax(0,220px));gap:16px;margin:10px 0 8px}
+.sale .days div{border:1px solid #d4af62;padding:18px 10px;display:flex;flex-direction:column;gap:6px}
+.sale .days span{font:500 11.5px var(--f-display);letter-spacing:.24em;text-transform:uppercase;color:#d4af62}
+.sale .days b{font:400 clamp(30px,4vw,40px)/1 var(--serif);font-variation-settings:'opsz' 28}
+.sale .days em{font-style:normal;font-size:15px;color:#e1dbd0}
+@media (max-width:480px){.sale .days{grid-template-columns:repeat(2,minmax(0,1fr));width:100%}}
+.sep{margin:0;font-size:13.5px;line-height:1.45;color:#55514a;border-left:2px solid #d4af62;padding-left:10px}
 .vitrina #cartbar,.vitrina #hdr-cart,.vitrina .howto,.vitrina #ztoast,.vitrina .solo,.vitrina .pv-note,.vitrina #add-cart{display:none!important}
 .vnote{border-top:1px solid var(--line);padding-top:18px;display:grid;gap:12px}
 .vnote p{margin:0;font-size:14.5px;line-height:1.5;color:#45423d}
@@ -519,7 +529,7 @@ body.has-cart .inst,body.pv-open .inst{display:none}
 </style>
 
 <script>window.__VITRINA=true</script>
-<div class="annc"><span class="win"><span class="rot"><span>Cambios de talla hasta 30 días</span><span>Muy pronto: aparta en línea</span><span>Ciudad de México · atención por WhatsApp</span></span></span></div>
+<div class="annc"><span class="win"><span class="rot"><span>Venta · dom 29 nov y jue 3 dic</span><span>Saco o pantalón: cómpralos por separado</span><span>Muy pronto: aparta en línea</span><span>Ciudad de México · atención por WhatsApp</span></span></span></div>
 <header class="shead"><div class="in">
   <button class="ib menu-b" type="button" id="menu-b" aria-label="Menú"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h18"/></svg></button>
   <nav class="snav" aria-label="Secciones"><a href="#nuevo">Novedades</a><a href="#tienda" data-go="saco">Sacos</a><a href="#tienda" data-go="pantalon">Pantalones</a><a href="#tienda" data-go="nino">Niño</a></nav>
@@ -550,6 +560,16 @@ body.has-cart .inst,body.pv-open .inst{display:none}
     <div class="ctas"><a class="btn solid" href="#tienda" data-go="saco">Sacos</a><a class="btn line" href="#tienda" data-go="pantalon">Pantalones</a></div>
   </div>
 </section>
+
+<section class="sale" id="venta" data-end="2026-12-03T22:00:00-06:00">
+  <div class="k-cap" style="color:#d4af62">New collection</div>
+  <h2>Venta <i>Zeke</i></h2>
+  <div class="days">
+    <div><span>Domingo</span><b>29 nov</b><em>12 pm – 8 pm</em></div>
+    <div><span>Jueves</span><b>3 dic</b><em>5 pm – 10 pm</em></div>
+  </div>
+  <a class="btn solid" href="https://wa.me/525585531331?text=Hola%20Zeke%2C%20quiero%20ir%20a%20la%20venta.%20%C2%BFMe%20pasas%20la%20ubicaci%C3%B3n%3F" target="_blank" rel="noopener">Pide la ubicación por WhatsApp</a>
+</section>
 <div class="wrap">
   <section class="sec" id="nuevo">
     <div class="sec-h"><div class="k-cap">Recién llegados</div><h2>Novedades</h2><a class="more" href="#tienda" data-go="all">Ver todo</a></div>
@@ -562,7 +582,7 @@ body.has-cart .inst,body.pv-open .inst{display:none}
   </section>
   <div class="perks">
     <div><b>Tela stretch</b><span>86% rayón, 14% spandex. Cómodo todo el día.</span></div>
-    <div><b>Tu talla exacta</b><span>Sacos en corto, regular y largo.</span></div>
+    <div><b>Saco o pantalón</b><span>Se venden por separado: arma tu traje con la talla exacta de cada pieza.</span></div>
     <div><b>Cambios 30 días</b><span>Cambio de talla con etiquetas.</span></div>
     <div><b>Atención directa</b><span>Pregúntanos por WhatsApp tu talla y color.</span></div>
   </div>
@@ -589,7 +609,7 @@ body.has-cart .inst,body.pv-open .inst{display:none}
     <div class="cols">
       <div><h3>Apartados</h3><ul>
         <li>Tu apartado se confirma <b>solo al recibir el pago completo</b> (liga de pago Clip o transferencia).</li>
-        <li>Tu prenda está lista para recoger en <b>hasta 48 horas hábiles</b> desde que apartas. Si la necesitas antes, la entrega <b>urgente en 24 horas</b> cuesta <b>$200</b> extra.</li>
+        <li>Tu prenda está lista para recoger <b>a partir de 3 días hábiles</b> desde que apartas. Si la necesitas antes, la entrega <b>urgente en 1 día hábil</b> cuesta <b>$200</b> extra.</li>
         <li>Te avisamos por WhatsApp cuando tu prenda esté lista.</li>
         <li>Se entrega <b>con el policía de la entrada</b>, a nombre de quien apartó.</li>
         <li>Tienes <b>1 a 2 días</b> para recogerla después del aviso. Si no pasas, regresa a bodega y <b>sigue apartada a tu nombre</b>: escríbenos y te la volvemos a dejar lista.</li>
@@ -690,10 +710,10 @@ const PAY={tarjeta:'Tarjeta (liga de pago Clip)',transferencia:'Transferencia'};
 let cli={n:'',t:'',p:'',u:false};
 try{ const v=JSON.parse(localStorage.getItem('zeke-cliente')||'null'); if(v&&typeof v==='object') cli={n:String(v.n||''),t:String(v.t||''),p:PAY[v.p]?v.p:'',u:false}; }catch(e){}
 const URG=200;
-const entregaTxt=()=>cli.u?`URGENTE: lista en 24 horas (+${money(URG)})`:'Normal: lista en hasta 48 horas hábiles';
+const entregaTxt=()=>cli.u?`URGENTE: lista en 1 día hábil (+${money(URG)})`:'Normal: lista a partir de 3 días hábiles';
 function entregaHTML(attr){ return `<div><div class="cf-l">¿Para cuándo la quieres?</div><div class="pay ent">
-      <button type="button" ${attr}="0" aria-pressed="${!cli.u}"><b>Normal</b><small>Hasta 48 h hábiles · sin costo</small></button>
-      <button type="button" ${attr}="1" aria-pressed="${cli.u}"><b>Urgente</b><small>En 24 h · +${money(URG)}</small></button></div></div>`; }
+      <button type="button" ${attr}="0" aria-pressed="${!cli.u}"><b>Normal</b><small>3 días hábiles · sin costo</small></button>
+      <button type="button" ${attr}="1" aria-pressed="${cli.u}"><b>Urgente</b><small>1 día hábil · +${money(URG)}</small></button></div></div>`; }
 function saveCli(){ try{ localStorage.setItem('zeke-cliente',JSON.stringify(cli)); }catch(e){} }
 const telDigits=()=>cli.t.replace(/\D/g,'');
 function cliMissing(){ const m=[]; if(cli.n.trim().length<2) m.push('tu nombre'); if(telDigits().length<10) m.push('tu teléfono (10 dígitos)'); if(!cli.p) m.push('la forma de pago'); return m; }
@@ -829,9 +849,9 @@ function renderCart(){
       <div><div class="cf-l">Forma de pago</div><div class="pay">${Object.keys(PAY).map(k=>`<button type="button" data-cpay="${k}" aria-pressed="${cli.p===k}">${k==='tarjeta'?'Tarjeta':'Transferencia'}</button>`).join('')}</div></div>
       ${entregaHTML('data-curg')}
     </div>
-    <div class="tot"><div class="r"><span>Subtotal · ${n} pieza${n>1?'s':''}</span><span>${money2(sub)}</span></div>${urg?`<div class="r"><span>Entrega urgente (24 h)</span><span>+ ${money2(urg)}</span></div>`:''}${cli.p==='tarjeta'?`<div class="r"><span>Comisión tarjeta (Clip) 4%</span><span>+ ${money2(fee)}</span></div>`:''}<div class="r big"><span>Total</span><b>${money2(tot)}</b></div></div>
+    <div class="tot"><div class="r"><span>Subtotal · ${n} pieza${n>1?'s':''}</span><span>${money2(sub)}</span></div>${urg?`<div class="r"><span>Entrega urgente (1 día hábil)</span><span>+ ${money2(urg)}</span></div>`:''}${cli.p==='tarjeta'?`<div class="r"><span>Comisión tarjeta (Clip) 4%</span><span>+ ${money2(fee)}</span></div>`:''}<div class="r big"><span>Total</span><b>${money2(tot)}</b></div></div>
     <a class="wa" id="cart-go" target="_blank" rel="noopener">${WA_ICON}<span>Enviar pedido por WhatsApp</span></a><div class="miss" id="cart-miss" aria-live="polite"></div><div id="order-out"></div>
-    <div class="pv-note">Te contestamos con la liga de pago (tarjeta) o los datos para transferencia. Tu pedido queda apartado al recibir el pago completo. Lista en hasta 48 horas hábiles. Sin devoluciones, solo cambios de talla. <a href="#politicas">Ver políticas</a></div>
+    <div class="pv-note">Te contestamos con la liga de pago (tarjeta) o los datos para transferencia. Tu pedido queda apartado al recibir el pago completo. Lista a partir de 3 días hábiles. Sin devoluciones, solo cambios de talla. <a href="#politicas">Ver políticas</a></div>
     <button type="button" class="linkbtn" id="cart-clear">${clearArm?'¿Seguro? Toca otra vez para vaciar':'Vaciar carrito'}</button>`
   :`<div class="cart-empty">Tu carrito está vacío.<br>Abre un modelo, elige color y talla y toca <b>Agregar al carrito</b>.<br><button type="button" class="addcart" id="cart-close2">Ver catálogo</button></div>`}
   </div>`;
@@ -849,7 +869,7 @@ function msgFor(k){
   const items=itemsFor(k); const {sub,urg,fee,tot,n}=totalsOf(items); const num=ensureOrder(k).num;
   const L=[`🧾 *PEDIDO ${num}*`,'Catálogo Zeke stretch by Hat Box','━━━━━━━━━━━━━━'];
   items.forEach((x,j)=>{ L.push(`*${j+1}. ${x.t}${/altos/i.test(x.brand||'')&&!/altos/i.test(x.t)?' · Altos':''}*`); L.push(`${x.color} · Talla ${fitName(x.s)}`); L.push(x.q>1?`${x.q} piezas × ${money2(x.price)} = *${money2(x.price*x.q)}*`:(x.price?`*${money2(x.price)}*`:'Precio por confirmar')); if(j<items.length-1) L.push(''); });
-  L.push('━━━━━━━━━━━━━━',`Subtotal (${n} pieza${n>1?'s':''}): ${money2(sub)}`); if(urg) L.push(`⚡ *Entrega URGENTE 24 h: +${money2(urg)}*`); if(fee) L.push(`Comisión tarjeta 4%: ${money2(fee)}`);
+  L.push('━━━━━━━━━━━━━━',`Subtotal (${n} pieza${n>1?'s':''}): ${money2(sub)}`); if(urg) L.push(`⚡ *Entrega URGENTE 1 día hábil: +${money2(urg)}*`); if(fee) L.push(`Comisión tarjeta 4%: ${money2(fee)}`);
   L.push(`*TOTAL: ${money2(tot)}*`,'━━━━━━━━━━━━━━',`*Cliente:* ${cli.n.trim()}`,`*Teléfono:* ${cli.t.trim()}`,`*Pago:* ${PAY[cli.p]||''}`,`*Entrega:* ${entregaTxt()}`,'Acepto: no hay devoluciones, solo cambios de talla.','',cli.p==='transferencia'?'¿Me mandan los datos para la transferencia? Gracias.':'¿Me mandan la liga de pago? Gracias.');
   return 'https://wa.me/'+WA+'?text='+encodeURIComponent(L.join('\n'));
 }
@@ -901,7 +921,7 @@ async function drawOrder(num,items){
   // totals
   y+=30; const row=(l,v,big)=>{ c.font=F(big?800:500,big?52:34); c.fillStyle=big?INK:MUT; c.fillText(l,P,y); c.textAlign='right'; c.fillStyle=big?'#9a6a17':INK; c.fillText(v,W-P,y); c.textAlign='left'; y+=big?70:54; };
   row(`Subtotal · ${np} pieza${np>1?'s':''}`,money2(sub));
-  if(urg) row('Entrega urgente (24 h)','+ '+money2(urg));
+  if(urg) row('Entrega urgente (1 día hábil)','+ '+money2(urg));
   if(fee) row('Comisión tarjeta (Clip) 4%','+ '+money2(fee));
   y+=10; c.fillStyle=INK; c.fillRect(P,y-34,W-2*P,3); y+=34; row('TOTAL',money2(tot),true);
   // customer
@@ -912,7 +932,7 @@ async function drawOrder(num,items){
   y+=250;
   c.fillStyle=MUT; c.font=F(500,26); c.textAlign='center';
   c.fillText('Zeke stretch by Hat Box México · WhatsApp 55 8553 1331',W/2,y); c.fillText('El pedido se aparta al recibir el pago completo.',W/2,y+40);
-  c.fillText(cli.u?'Entrega urgente: lista en 24 horas. Sin devoluciones, solo cambios de talla.':'Lista en hasta 48 horas hábiles. Sin devoluciones, solo cambios de talla.',W/2,y+80);
+  c.fillText(cli.u?'Entrega urgente: lista en 1 día hábil. Sin devoluciones, solo cambios de talla.':'Lista a partir de 3 días hábiles. Sin devoluciones, solo cambios de talla.',W/2,y+80);
   return await new Promise(r=>cv.toBlob(r,'image/png'));
 }
 let cfmK=null;
@@ -921,7 +941,7 @@ function openConfirm(k){
   const el=document.getElementById('cfm');
   el.innerHTML=`<div class="box"><h2 id="cfm-h">Antes de apartar</h2>
     <ul>
-      <li>${cli.u?`<b>Entrega urgente:</b> tu prenda estará lista en <b>24 horas</b> (costo extra de ${money(URG)}).`:`Tu prenda estará lista para recoger en <b>hasta 48 horas hábiles</b> desde que apartas. ¿La necesitas antes? Elige <b>Urgente</b> (24 h, +${money(URG)}).`}</li>
+      <li>${cli.u?`<b>Entrega urgente:</b> tu prenda estará lista en <b>1 día hábil</b> (costo extra de ${money(URG)}).`:`Tu prenda estará lista para recoger <b>a partir de 3 días hábiles</b> desde que apartas. ¿La necesitas antes? Elige <b>Urgente</b> (1 día hábil, +${money(URG)}).`}</li>
       <li>El apartado se confirma <b>al recibir tu pago completo</b>.</li>
       <li>Se recoge con el policía de la entrada, a nombre de quien aparta.</li>
     </ul>
@@ -993,6 +1013,18 @@ document.getElementById('pv').addEventListener('input',e=>{
 document.addEventListener('keydown',e=>{ if(openI==null) return; if(e.target.closest&&e.target.closest('input')) return; if(e.key==='Escape') closeModel(); if(e.key==='ArrowRight') goImg(imgI+1); if(e.key==='ArrowLeft') goImg(imgI-1); });
 window.addEventListener('hashchange',syncHash); window.addEventListener('popstate',syncHash);
 render(); syncHash();
+/* ---- venta: se oculta sola al terminar; nota de pieza suelta ---- */
+(function(){
+  const v=document.getElementById('venta');
+  if(v&&Date.now()>new Date(v.dataset.end).getTime()) v.remove();
+  const _rp=renderPv; renderPv=function(){ _rp();
+    const info=document.querySelector('#pv .pv-info'); if(!info||openI==null) return;
+    const g=DATA[openI]; if(g.traje||info.querySelector('.sep')) return;
+    const pr=info.querySelector('.price'); if(!pr) return;
+    const txt=g.cat==='pantalon'?'Se vende por separado. Combínalo con el saco de tu talla para armar tu traje.':'Se vende por separado. Combínalo con el pantalón de tu talla para armar tu traje.';
+    pr.insertAdjacentHTML('afterend','<p class="sep">'+txt+'</p>');
+  };
+})();
 /* ---- guía de tallas ---- */
 (function(){
   const sg=document.getElementById('sg'); if(!sg) return;
