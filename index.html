@@ -484,6 +484,32 @@ body.pv-open .wafab{display:none}
 .inst .acts .go{background:#141414;color:#fff}
 .inst svg{vertical-align:-3px}
 body.has-cart .inst,body.pv-open .inst{display:none}
+.sg{position:fixed;inset:0;z-index:80;background:rgba(20,20,20,.45);display:flex;justify-content:flex-end}
+.sg[hidden]{display:none}
+.sg-p{position:relative;width:min(560px,100%);height:100%;overflow-y:auto;background:#fff;padding:34px clamp(22px,4vw,44px) calc(34px + env(safe-area-inset-bottom,0px))}
+.sg-p .x{position:absolute;top:14px;right:14px;width:44px;height:44px;border:0;background:none;font-size:22px;color:var(--ink)}
+.sg-p h2{margin:12px 0 14px;font:400 clamp(30px,4vw,40px)/1.08 var(--serif)}
+.sg-p .lead{margin:0 0 6px;font-size:15.5px;line-height:1.55;color:#3d3b37}
+.sg-p .lead b{font-weight:500;color:var(--ink)}
+.sg-p h3{margin:30px 0 12px;font:500 11.5px var(--f-display);letter-spacing:.2em;text-transform:uppercase}
+.sg-p .tw{overflow-x:auto}
+.sg-p table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:420px}
+.sg-p th{text-align:left;font-weight:500;padding:10px 12px 10px 0;white-space:nowrap;color:var(--muted);font-size:13px}
+.sg-p td{text-align:center;padding:10px 4px;border-left:1px solid var(--line);font-variant-numeric:tabular-nums}
+.sg-p tr+tr{border-top:1px solid var(--line)}
+.sg-p table{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.sg-p .lg{margin:0;display:grid;gap:0;border-top:1px solid var(--line)}
+.sg-p .lg div{display:grid;grid-template-columns:110px 1fr;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.sg-p dt{font:400 20px/1.2 var(--serif)}
+.sg-p dd{margin:0;font-size:15px;color:#45423d;align-self:center}
+.sg-p .fine{margin:10px 0 0;font-size:13px;color:var(--muted)}
+.sg-p th,.sg-p td{font-size:inherit}
+@media (max-width:600px){.sg-p table{min-width:0;font-size:13px}.sg-p th{font-size:11.5px;padding-right:6px;white-space:normal;width:64px}.sg-p td{padding:9px 0}}
+.sg-foot{margin-top:34px;padding-top:22px;border-top:1px solid var(--line);display:grid;gap:14px}
+.sg-foot p{margin:0;font-size:15px;line-height:1.5;color:#3d3b37}
+.sg-foot b{font-weight:500;color:var(--ink)}
+.sg-link{background:none;border:0;padding:0;color:var(--ink);font:500 11px var(--f-display);letter-spacing:.16em;text-transform:uppercase;border-bottom:1px solid var(--ink);cursor:pointer;margin-left:10px}
+.try{margin:0;font-size:13.5px;line-height:1.45;color:#55514a}
 .vitrina #cartbar,.vitrina #hdr-cart,.vitrina .howto,.vitrina #ztoast,.vitrina .solo,.vitrina .pv-note,.vitrina #add-cart{display:none!important}
 .vnote{border-top:1px solid var(--line);padding-top:18px;display:grid;gap:12px}
 .vnote p{margin:0;font-size:14.5px;line-height:1.5;color:#45423d}
@@ -512,6 +538,7 @@ body.has-cart .inst,body.pv-open .inst{display:none}
   <a href="#tienda" data-go="pantalon">Pantalones</a>
   <a href="#tienda" data-go="nino">Niño</a>
   <a href="#visitanos">La tienda</a>
+  <a href="#tallas" data-sg="1">Guía de tallas<small>¿Cuál es mi talla?</small></a>
   <a href="#instalar" data-inst="1">Instala la app<small>Zeke en tu pantalla de inicio</small></a>
   <a class="wa-l" href="https://wa.me/525585531331?text=Hola%20Zeke%2C%20vengo%20de%20su%20p%C3%A1gina%20web" target="_blank" rel="noopener">WhatsApp · 55 8553 1331</a>
 </div></div>
@@ -612,11 +639,28 @@ b.onclick=function(){var p=null;try{p=navigator.clipboard&&navigator.clipboard.w
 <footer class="sfoot"><div class="in">
   <div class="brandc"><img src="wm-white.png" alt="Zeke stretch" loading="lazy"><p>Sacos y pantalones stretch. Ciudad de México.</p></div>
   <div><h4>Tienda</h4><a href="#nuevo">Novedades</a><a href="#tienda" data-go="saco">Sacos</a><a href="#tienda" data-go="pantalon">Pantalones</a><a href="#tienda" data-go="nino">Niño</a></div>
-  <div><h4>Ayuda</h4><a href="#como-apartar">Cómo apartar</a><a href="#politicas">Apartados y cambios</a><a href="#pago">Cuidado de tu prenda</a><a href="#visitanos">La tienda</a><a href="#instalar" data-inst="1">Instala la app</a></div>
+  <div><h4>Ayuda</h4><a href="#tallas" data-sg="1">Guía de tallas</a><a href="#como-apartar">Cómo apartar</a><a href="#politicas">Apartados y cambios</a><a href="#pago">Cuidado de tu prenda</a><a href="#visitanos">La tienda</a><a href="#instalar" data-inst="1">Instala la app</a></div>
   <div><h4>Contacto</h4><a href="https://wa.me/525585531331?text=Hola%20Zeke%2C%20vengo%20de%20su%20p%C3%A1gina%20web" target="_blank" rel="noopener">WhatsApp 55 8553 1331</a><p>Sierra Guadarrama 90<br>Ciudad de México</p><p style="margin-top:10px">Tarjeta · Transferencia · Efectivo en tienda</p></div>
   <div class="copy"><span>© 2026 Zeke stretch by Hat Box México</span><span>Precios en pesos mexicanos</span></div>
 </div></footer>
 <a class="wafab" href="https://wa.me/525585531331?text=Hola%20Zeke%2C%20vengo%20de%20su%20p%C3%A1gina%20web" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp"><svg width="27" height="27" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.4.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg></a>
+
+<div class="sg" id="sg" hidden><div class="sg-p" role="dialog" aria-modal="true" aria-labelledby="sg-t">
+  <button class="x" type="button" id="sg-x" aria-label="Cerrar">✕</button>
+  <div class="k-cap">Guía de tallas</div>
+  <h2 id="sg-t">¿Cuál es mi talla?</h2>
+  <p class="lead">Te recomendamos <b>venir a probártelo</b>: nuestro corte slim se ajusta distinto a cada cuerpo, y en la tienda te ayudamos a encontrar el que te queda perfecto. Si ya conoces tu talla y ya has usado este tipo de trajes, pídelo con confianza.</p>
+  <h3>Sacos · el número</h3>
+  <div class="tw"><table><tr><th>México / EUA</th><td>36</td><td>38</td><td>40</td><td>42</td><td>44</td><td>46</td><td>48</td></tr><tr><th>Europa</th><td>46</td><td>48</td><td>50</td><td>52</td><td>54</td><td>56</td><td>58</td></tr></table></div>
+  <h3>Sacos · el largo</h3>
+  <dl class="lg"><div><dt>Corto</dt><dd>Para personas de estatura baja.</dd></div><div><dt>Regular</dt><dd>Para estatura media. Es el más común.</dd></div><div><dt>Largo</dt><dd>Para personas altas.</dd></div></dl>
+  <h3>Pantalones · la cintura</h3>
+  <div class="tw"><table><tr><th>Talla</th><td>28</td><td>30</td><td>32</td><td>34</td><td>36</td><td>38</td><td>40</td><td>42</td><td>44</td></tr><tr><th>Cintura (cm)</th><td>71</td><td>76</td><td>81</td><td>86</td><td>91</td><td>97</td><td>102</td><td>107</td><td>112</td></tr></table></div>
+  <h3>Niño · por edad</h3>
+  <div class="tw"><table><tr><th>Talla</th><td>8</td><td>10</td><td>12</td><td>14</td><td>16</td><td>18</td><td>20</td></tr><tr><th>Edad aprox.</th><td>7–8</td><td>9–10</td><td>11–12</td><td>13</td><td>14</td><td>15</td><td>16</td></tr></table></div>
+  <p class="fine">Las edades son un estimado: depende de la estatura y complexión de cada niño.</p>
+  <div class="sg-foot"><p>¿Tienes duda entre dos tallas? Escríbenos y te ayudamos. Tienes <b>cambio de talla hasta 30 días</b>.</p><a class="btn dark" href="https://wa.me/525585531331?text=Hola%20Zeke%2C%20tengo%20una%20duda%20de%20talla" target="_blank" rel="noopener">Preguntar por WhatsApp</a></div>
+</div></div>
 
 <div class="pv" id="pv" role="dialog" aria-modal="true" aria-label="Detalle del modelo" hidden></div>
 <div class="pv" id="cartpv" role="dialog" aria-modal="true" aria-label="Mi carrito" hidden></div>
@@ -949,6 +993,24 @@ document.getElementById('pv').addEventListener('input',e=>{
 document.addEventListener('keydown',e=>{ if(openI==null) return; if(e.target.closest&&e.target.closest('input')) return; if(e.key==='Escape') closeModel(); if(e.key==='ArrowRight') goImg(imgI+1); if(e.key==='ArrowLeft') goImg(imgI-1); });
 window.addEventListener('hashchange',syncHash); window.addEventListener('popstate',syncHash);
 render(); syncHash();
+/* ---- guía de tallas ---- */
+(function(){
+  const sg=document.getElementById('sg'); if(!sg) return;
+  const open=()=>{ sg.hidden=false; sg.querySelector('.sg-p').scrollTop=0; };
+  const close=()=>{ sg.hidden=true; };
+  document.addEventListener('click',e=>{
+    if(e.target.closest('[data-sg]')){ e.preventDefault(); document.getElementById('drawer').hidden=true; open(); return; }
+    if(e.target.closest('#sg-x')||e.target===sg) close();
+  });
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&!sg.hidden) close(); });
+  const _rp=renderPv; renderPv=function(){ _rp();
+    const info=document.querySelector('#pv .pv-info'); if(!info) return;
+    const lbl=[...info.querySelectorAll('.lbl')].find(x=>/Tallas/i.test(x.textContent));
+    if(lbl&&!lbl.querySelector('.sg-link')) lbl.insertAdjacentHTML('beforeend','<button type="button" class="sg-link" data-sg="1">¿Cuál es mi talla?</button>');
+    const add=info.querySelector('#add-cart');
+    if(add&&!window.__VITRINA&&!info.querySelector('.try')) add.insertAdjacentHTML('beforebegin','<p class="try">Te recomendamos probártelo en tienda. Si no puedes venir, tienes cambio de talla hasta 30 días.</p>');
+  };
+})();
 /* ---- modo vitrina: se ve todo, sin apartar ---- */
 (function(){
   if(!window.__VITRINA) return;
