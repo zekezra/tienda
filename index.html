@@ -484,11 +484,16 @@ body.pv-open .wafab{display:none}
 .inst .acts .go{background:#141414;color:#fff}
 .inst svg{vertical-align:-3px}
 body.has-cart .inst,body.pv-open .inst{display:none}
+.vitrina #cartbar,.vitrina #hdr-cart,.vitrina .howto,.vitrina #ztoast,.vitrina .solo,.vitrina .pv-note,.vitrina #add-cart{display:none!important}
+.vnote{border-top:1px solid var(--line);padding-top:18px;display:grid;gap:12px}
+.vnote p{margin:0;font-size:14.5px;line-height:1.5;color:#45423d}
+.vnote p b{display:block;font:400 21px/1.2 var(--serif);color:var(--ink);margin-bottom:4px}
+.vnote a{display:flex;align-items:center;justify-content:center;gap:10px;min-height:52px;background:#141414;color:#fff;text-decoration:none;font:500 12.5px var(--f-display);letter-spacing:.16em;text-transform:uppercase}
 .demo-bar{background:#e9e7e3;color:#55514a;font:400 12px var(--f-display);letter-spacing:.06em;text-align:center;padding:6px}
 </style>
 
-
-<div class="annc"><span class="win"><span class="rot"><span>Cambios de talla hasta 30 días</span><span>Aparta por WhatsApp · recoge en tienda</span><span>Sierra Guadarrama 90 · Ciudad de México</span></span></span></div>
+<script>window.__VITRINA=true</script>
+<div class="annc"><span class="win"><span class="rot"><span>Cambios de talla hasta 30 días</span><span>Muy pronto: aparta en línea</span><span>Sierra Guadarrama 90 · Ciudad de México</span></span></span></div>
 <header class="shead"><div class="in">
   <button class="ib menu-b" type="button" id="menu-b" aria-label="Menú"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h18"/></svg></button>
   <nav class="snav" aria-label="Secciones"><a href="#nuevo">Novedades</a><a href="#tienda" data-go="saco">Sacos</a><a href="#tienda" data-go="pantalon">Pantalones</a><a href="#tienda" data-go="nino">Niño</a></nav>
@@ -532,7 +537,7 @@ body.has-cart .inst,body.pv-open .inst{display:none}
     <div><b>Tela stretch</b><span>86% rayón, 14% spandex. Cómodo todo el día.</span></div>
     <div><b>Tu talla exacta</b><span>Sacos en corto, regular y largo.</span></div>
     <div><b>Cambios 30 días</b><span>Cambio de talla con etiquetas.</span></div>
-    <div><b>Aparta fácil</b><span>Por WhatsApp y recoge en tienda.</span></div>
+    <div><b>Atención directa</b><span>Pregúntanos por WhatsApp tu talla y color.</span></div>
   </div>
 </div>
 
@@ -944,6 +949,24 @@ document.getElementById('pv').addEventListener('input',e=>{
 document.addEventListener('keydown',e=>{ if(openI==null) return; if(e.target.closest&&e.target.closest('input')) return; if(e.key==='Escape') closeModel(); if(e.key==='ArrowRight') goImg(imgI+1); if(e.key==='ArrowLeft') goImg(imgI-1); });
 window.addEventListener('hashchange',syncHash); window.addEventListener('popstate',syncHash);
 render(); syncHash();
+/* ---- modo vitrina: se ve todo, sin apartar ---- */
+(function(){
+  if(!window.__VITRINA) return;
+  document.body.classList.add('vitrina');
+  openCart=function(){};
+  const WAN='525585531331';
+  const _rp=renderPv; renderPv=function(){ _rp();
+    const pv=document.getElementById('pv'), info=pv.querySelector('.pv-info'); if(!info||openI==null) return;
+    info.querySelectorAll('.wa.off').forEach(x=>{ if(/^Elige/.test(x.textContent)) x.remove(); });
+    const g=DATA[openI], c=g.colors[pick[openI]||0], t=sizeSel[openI];
+    const msg='Hola Zeke, me interesa: '+title(g)+' · '+c.color+(t?' · talla '+fitName(t):'');
+    const n=document.createElement('div'); n.className='vnote';
+    n.innerHTML='<p><b>Muy pronto podrás apartar en línea</b>Mientras tanto, escríbenos por WhatsApp y te ayudamos con tu talla y color.</p><a target="_blank" rel="noopener" href="https://wa.me/'+WAN+'?text='+encodeURIComponent(msg)+'">Preguntar por WhatsApp</a>';
+    const note=info.querySelector('.pv-note'); (note||info.lastElementChild).insertAdjacentElement(note?'beforebegin':'afterend',n);
+  };
+  if(document.getElementById('pv') && !document.getElementById('pv').hidden) renderPv();
+})();
+
 /* ---- app instalable ---- */
 (function(){
   try{ if('serviceWorker' in navigator && location.protocol==='https:') navigator.serviceWorker.register('sw.js').catch(()=>{}); }catch(e){}
@@ -959,7 +982,7 @@ render(); syncHash();
     document.querySelector('.inst')?.remove();
     const el=document.createElement('div'); el.className='inst'; el.setAttribute('role','dialog'); el.setAttribute('aria-label','Instala la app de Zeke');
     let body, act;
-    if(deferred){ body='Tenla en tu pantalla de inicio y aparta en segundos.'; act='<button type="button" class="no">Ahora no</button><button type="button" class="go">Instalar</button>'; }
+    if(deferred){ body='Tenla en tu pantalla de inicio y mira las novedades primero.'; act='<button type="button" class="no">Ahora no</button><button type="button" class="go">Instalar</button>'; }
     else if(ios){ body=`Toca ${SHARE} <b style="display:inline;font:600 14px var(--f-display)">Compartir</b> abajo en Safari y luego <b style="display:inline;font:600 14px var(--f-display)">“Agregar a pantalla de inicio”</b>.`; act='<button type="button" class="no">Entendido</button>'; }
     else if(force){ body='Abre el menú de tu navegador (⋮) y elige <b style="display:inline;font:600 14px var(--f-display)">“Instalar app”</b> o “Agregar a pantalla de inicio”.'; act='<button type="button" class="no">Entendido</button>'; }
     else return;
