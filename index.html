@@ -1,4 +1,4 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#141414"><link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"><link rel="apple-touch-icon" href="apple-touch-icon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Zeke"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="Sacos y pantalones stretch en Ciudad de México. Aparta por WhatsApp y recoge en Sierra Guadarrama 90."></head><body>
 <title>Zeke · Sastrería stretch</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -475,6 +475,15 @@ body{font-family:var(--f-display);font-weight:400;font-size:15.5px;letter-spacin
 .wafab{position:fixed;right:max(18px,env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:35;width:54px;height:54px;border-radius:50%;background:#1f8f4e;color:#fff;display:grid;place-items:center;box-shadow:0 6px 18px rgba(0,0,0,.22)}
 body.has-cart .wafab{bottom:calc(86px + env(safe-area-inset-bottom,0px))}
 body.pv-open .wafab{display:none}
+.inst{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:70;max-width:440px;margin:0 auto;background:#fff;color:var(--ink);border:1px solid var(--line);box-shadow:0 12px 40px rgba(0,0,0,.18);display:grid;grid-template-columns:56px 1fr;gap:14px;padding:16px 16px 16px 16px;align-items:start}
+.inst img{width:56px;height:56px}
+.inst b{display:block;font:400 20px/1.15 var(--serif);margin-bottom:4px}
+.inst p{margin:0;font-size:14px;line-height:1.45;color:#45423d}
+.inst .acts{grid-column:1/-1;display:flex;gap:10px;justify-content:flex-end}
+.inst .acts button{min-height:44px;padding:0 18px;font:500 12px var(--f-display);letter-spacing:.16em;text-transform:uppercase;border:1px solid var(--ink);background:#fff;color:var(--ink);cursor:pointer}
+.inst .acts .go{background:#141414;color:#fff}
+.inst svg{vertical-align:-3px}
+body.has-cart .inst,body.pv-open .inst{display:none}
 .demo-bar{background:#e9e7e3;color:#55514a;font:400 12px var(--f-display);letter-spacing:.06em;text-align:center;padding:6px}
 </style>
 
@@ -498,6 +507,7 @@ body.pv-open .wafab{display:none}
   <a href="#tienda" data-go="pantalon">Pantalones</a>
   <a href="#tienda" data-go="nino">Niño</a>
   <a href="#visitanos">La tienda</a>
+  <a href="#instalar" data-inst="1">Instala la app<small>Zeke en tu pantalla de inicio</small></a>
   <a class="wa-l" href="https://wa.me/525585531331?text=Hola%20Zeke%2C%20vengo%20de%20su%20p%C3%A1gina%20web" target="_blank" rel="noopener">WhatsApp · 55 8553 1331</a>
 </div></div>
 <section class="shero" id="top">
@@ -597,7 +607,7 @@ b.onclick=function(){var p=null;try{p=navigator.clipboard&&navigator.clipboard.w
 <footer class="sfoot"><div class="in">
   <div class="brandc"><img src="wm-white.png" alt="Zeke stretch" loading="lazy"><p>Sacos y pantalones stretch. Ciudad de México.</p></div>
   <div><h4>Tienda</h4><a href="#nuevo">Novedades</a><a href="#tienda" data-go="saco">Sacos</a><a href="#tienda" data-go="pantalon">Pantalones</a><a href="#tienda" data-go="nino">Niño</a></div>
-  <div><h4>Ayuda</h4><a href="#como-apartar">Cómo apartar</a><a href="#politicas">Apartados y cambios</a><a href="#pago">Cuidado de tu prenda</a><a href="#visitanos">La tienda</a></div>
+  <div><h4>Ayuda</h4><a href="#como-apartar">Cómo apartar</a><a href="#politicas">Apartados y cambios</a><a href="#pago">Cuidado de tu prenda</a><a href="#visitanos">La tienda</a><a href="#instalar" data-inst="1">Instala la app</a></div>
   <div><h4>Contacto</h4><a href="https://wa.me/525585531331?text=Hola%20Zeke%2C%20vengo%20de%20su%20p%C3%A1gina%20web" target="_blank" rel="noopener">WhatsApp 55 8553 1331</a><p>Sierra Guadarrama 90<br>Ciudad de México</p><p style="margin-top:10px">Tarjeta · Transferencia · Efectivo en tienda</p></div>
   <div class="copy"><span>© 2026 Zeke stretch by Hat Box México</span><span>Precios en pesos mexicanos</span></div>
 </div></footer>
@@ -934,6 +944,36 @@ document.getElementById('pv').addEventListener('input',e=>{
 document.addEventListener('keydown',e=>{ if(openI==null) return; if(e.target.closest&&e.target.closest('input')) return; if(e.key==='Escape') closeModel(); if(e.key==='ArrowRight') goImg(imgI+1); if(e.key==='ArrowLeft') goImg(imgI-1); });
 window.addEventListener('hashchange',syncHash); window.addEventListener('popstate',syncHash);
 render(); syncHash();
+/* ---- app instalable ---- */
+(function(){
+  try{ if('serviceWorker' in navigator && location.protocol==='https:') navigator.serviceWorker.register('sw.js').catch(()=>{}); }catch(e){}
+  const standalone=matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
+  const ios=/iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+  let deferred=null;
+  const KEY='zk-inst-x', SHARE='<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3v12M8 7l4-4 4 4"/><path d="M5 11v9h14v-9"/></svg>';
+  const seenRecently=()=>{ try{ return Date.now()-(+localStorage.getItem(KEY)||0) < 14*864e5; }catch(e){ return false; } };
+  function close(el){ el.remove(); try{ localStorage.setItem(KEY,Date.now()); }catch(e){} }
+  function show(force){
+    if(standalone){ if(force) alertBox('Ya tienes la app','Estás usando Zeke como app. ¡Gracias!'); return; }
+    if(!force && seenRecently()) return;
+    document.querySelector('.inst')?.remove();
+    const el=document.createElement('div'); el.className='inst'; el.setAttribute('role','dialog'); el.setAttribute('aria-label','Instala la app de Zeke');
+    let body, act;
+    if(deferred){ body='Tenla en tu pantalla de inicio y aparta en segundos.'; act='<button type="button" class="no">Ahora no</button><button type="button" class="go">Instalar</button>'; }
+    else if(ios){ body=`Toca ${SHARE} <b style="display:inline;font:600 14px var(--f-display)">Compartir</b> abajo en Safari y luego <b style="display:inline;font:600 14px var(--f-display)">“Agregar a pantalla de inicio”</b>.`; act='<button type="button" class="no">Entendido</button>'; }
+    else if(force){ body='Abre el menú de tu navegador (⋮) y elige <b style="display:inline;font:600 14px var(--f-display)">“Instalar app”</b> o “Agregar a pantalla de inicio”.'; act='<button type="button" class="no">Entendido</button>'; }
+    else return;
+    el.innerHTML=`<img src="icon-192.png" alt=""><div><b>Instala la app de Zeke</b><p>${body}</p></div><div class="acts">${act}</div>`;
+    document.body.appendChild(el);
+    el.querySelector('.no').onclick=()=>close(el);
+    const go=el.querySelector('.go'); if(go) go.onclick=async()=>{ try{ deferred.prompt(); await deferred.userChoice; }catch(e){} deferred=null; close(el); };
+  }
+  function alertBox(t,p){ const el=document.createElement('div'); el.className='inst'; el.innerHTML=`<img src="icon-192.png" alt=""><div><b>${t}</b><p>${p}</p></div><div class="acts"><button type="button" class="no">Cerrar</button></div>`; document.body.appendChild(el); el.querySelector('.no').onclick=()=>el.remove(); }
+  addEventListener('beforeinstallprompt',e=>{ e.preventDefault(); deferred=e; setTimeout(()=>show(false),6000); });
+  addEventListener('appinstalled',()=>{ document.querySelector('.inst')?.remove(); try{ localStorage.setItem(KEY,Date.now()); }catch(e){} });
+  if(ios && !standalone) setTimeout(()=>show(false),8000);
+  document.addEventListener('click',e=>{ const a=e.target.closest('[data-inst]'); if(!a) return; e.preventDefault(); document.getElementById('drawer').hidden=true; show(true); });
+})();
 /* ---- tienda: novedades, colecciones, menú, bolsa ---- */
 (function(){
   const firstPhoto=g=>{ const j=g.colors.findIndex(c=>c.big||c.photo); return j<0?null:{j,src:g.colors[j].big||g.colors[j].photo}; };
