@@ -1,46 +1,24 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#141414"><link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"><link rel="apple-touch-icon" href="apple-touch-icon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Zeke"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="Sacos y pantalones stretch en Ciudad de México. Aparta por WhatsApp y recoge en tienda."></head><body>
-<div id="zlock" data-until="2026-11-24T21:30:00-06:00" role="dialog" aria-modal="true" aria-label="Muy pronto">
+<div id="zlock" data-until="2026-11-24T21:30:00-06:00" role="img" aria-label="Zeke stretch · muy pronto">
 <style>
 html.zl,html.zl body{overflow:hidden!important}
-#zlock{position:fixed;inset:0;z-index:2147483000;background:#0b0b0b;color:#f4efe3;display:flex;align-items:center;justify-content:center;text-align:center;padding:32px 22px;font-family:Jost,system-ui,sans-serif;transition:opacity .9s ease}
+#zlock{position:fixed;inset:0;z-index:2147483000;background:#060504;overflow:hidden;transition:opacity 1s ease}
 #zlock.out{opacity:0;pointer-events:none}
-#zlock::before{content:"";position:absolute;inset:18px;border:1px solid rgba(212,175,98,.35);pointer-events:none}
-#zlock .in{max-width:520px;width:100%}
-#zlock .wm{width:min(230px,58vw);height:auto;display:block;margin:0 auto 34px}
-#zlock .k{font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:#d4af62;margin:0 0 14px}
-#zlock h1{font-family:"Bodoni Moda",Didot,Georgia,serif;font-weight:400;font-size:clamp(38px,10vw,64px);line-height:1.02;margin:0 0 12px;letter-spacing:-.01em}
-#zlock h1 i{font-style:italic;color:#d4af62}
-#zlock .sub{font-size:15px;color:#bdb6a6;margin:0 0 34px;line-height:1.5}
-#zlock .cd{display:flex;justify-content:center;gap:10px;margin:0 0 34px}
-#zlock .cd div{min-width:74px;padding:14px 6px 10px;border:1px solid rgba(212,175,98,.45)}
-#zlock .cd b{display:block;font-family:"Bodoni Moda",Didot,Georgia,serif;font-weight:400;font-size:clamp(34px,9vw,48px);line-height:1;font-variant-numeric:tabular-nums}
-#zlock .cd span{display:block;margin-top:8px;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:#8f887a}
-#zlock .when{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:#f4efe3;margin:0 0 26px}
-#zlock a.zlb{display:inline-flex;align-items:center;gap:10px;padding:14px 24px;border:1px solid #d4af62;color:#d4af62;text-decoration:none;font-size:12px;letter-spacing:.2em;text-transform:uppercase}
-#zlock a.zlb:hover{background:#d4af62;color:#0b0b0b}
-@media (max-width:380px){#zlock .cd div{min-width:64px}}
+#zlock::before{content:"";position:absolute;inset:-40px;background:url(lock.jpg) center/cover;filter:blur(28px) brightness(.45)}#zlock .bx{position:absolute;top:50%;left:50%;height:max(100vh,177.78vw);height:max(100dvh,177.78vw);width:max(56.25vh,100vw);width:max(56.25dvh,100vw);transform:translate(-50%,-50%);container-type:size;background:url(lock.jpg) center/cover no-repeat;box-shadow:0 0 60px 30px #060504}@media (min-aspect-ratio:3/4){#zlock .bx{height:100vh;height:100dvh;width:56.25vh;width:56.25dvh}}
+#zlock .cd{position:absolute;left:0;right:0;top:68.4%;transform:translateY(-50%);text-align:center;font-family:"Bodoni Moda",Didot,"Times New Roman",serif;font-weight:400;font-size:2.4vh;font-size:2.4cqh;letter-spacing:.42em;padding-left:.42em;color:#c49a6c;opacity:.92;font-variant-numeric:tabular-nums;white-space:nowrap;text-shadow:0 0 12px rgba(196,154,108,.25)}
 </style>
-<div class="in">
-  <img class="wm" src="wordmark.png" alt="Zeke stretch">
-  <p class="k">New collection</p>
-  <h1>Algo nuevo <i>llega</i></h1>
-  <p class="sub">Estamos preparando la tienda.<br>Vuelve aquí cuando el reloj llegue a cero.</p>
-  <div class="cd" aria-live="polite"><div><b id="zl-h">00</b><span>Horas</span></div><div><b id="zl-m">00</b><span>Min</span></div><div><b id="zl-s">00</b><span>Seg</span></div></div>
-  <p class="when">Hoy · 9:30 pm</p>
-  <a class="zlb" href="https://wa.me/525585531331?text=Hola%2C%20quiero%20que%20me%20avisen%20cuando%20abra%20la%20venta%20de%20Zeke" target="_blank" rel="noopener">Avísame por WhatsApp</a>
-</div>
+<div class="bx"><div class="cd" id="zl-t" aria-live="off">00 00 00</div></div>
 <script>
 (function(){
   var el=document.getElementById('zlock'), end=new Date(el.dataset.until).getTime();
-  var qs=location.search;
-  if(Date.now()>=end || /[?&]ver=zeke/.test(qs)){ el.remove(); return; }
+  if(Date.now()>=end || /[?&]ver=zeke/.test(location.search)){ el.remove(); return; }
   document.documentElement.classList.add('zl');
-  var h=document.getElementById('zl-h'),m=document.getElementById('zl-m'),s=document.getElementById('zl-s');
+  var t=document.getElementById('zl-t');
   function p(n){return (n<10?'0':'')+n}
   function tick(){
-    var d=Math.max(0,end-Date.now()), t=Math.floor(d/1000);
-    h.textContent=p(Math.floor(t/3600)); m.textContent=p(Math.floor(t%3600/60)); s.textContent=p(t%60);
-    if(d<=0){ clearInterval(iv); el.classList.add('out'); document.documentElement.classList.remove('zl'); setTimeout(function(){el.remove();},1000); }
+    var d=Math.max(0,end-Date.now()), s=Math.floor(d/1000);
+    t.textContent=p(Math.floor(s/3600))+' '+p(Math.floor(s%3600/60))+' '+p(s%60);
+    if(d<=0){ clearInterval(iv); el.classList.add('out'); document.documentElement.classList.remove('zl'); setTimeout(function(){el.remove();},1100); }
   }
   var iv=setInterval(tick,1000); tick();
 })();
