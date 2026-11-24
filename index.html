@@ -622,7 +622,7 @@ body.has-cart .inst,body.pv-open .inst{display:none}
     <div><i>PASO 1</i><b>Elige y agrega al carrito</b><span>Toca la prenda, escoge color y talla y toca “Agregar al carrito”. Puedes agregar varias.</span></div>
     <div><i>PASO 2</i><b>Envía tu pedido</b><span>Abre tu carrito, escribe tu nombre, teléfono y forma de pago, y toca “Enviar pedido por WhatsApp”. El mensaje ya va con todo y el total.</span></div>
     <div><i>PASO 3</i><b>Paga</b><span>Te mandamos una liga para pagar con tarjeta (Clip) o los datos para transferencia.</span></div>
-    <div><i>PASO 4</i><b>Recoge tu prenda</b><span>Te avisamos por WhatsApp cuando esté lista; la recoges con el policía de la entrada.</span></div>
+    <div><i>PASO 4</i><b>Recoge tu prenda (pick-up)</b><span>Te avisamos por WhatsApp cuando esté lista; la recoges con el policía de la entrada. Por ahora no tenemos envío a domicilio.</span></div>
     <div class="tel">WhatsApp de la tienda: <span>55 8553 1331</span><a href="#politicas">Políticas de apartado y cambios ↓</a></div>
   </div>
   </details>
@@ -638,6 +638,7 @@ body.has-cart .inst,body.pv-open .inst{display:none}
         <li>Tu apartado se confirma <b>solo al recibir el pago completo</b> (liga de pago Clip o transferencia).</li>
         <li>Tu prenda está lista para recoger <b>a partir de 3 días hábiles</b> desde que apartas. Si la necesitas antes, la entrega <b>urgente en 1 día hábil</b> cuesta <b>$200</b> extra.</li>
         <li>Te avisamos por WhatsApp cuando tu prenda esté lista.</li>
+        <li>Por ahora <b>no tenemos envío a domicilio</b>: solo <b>pick-up</b> (recoger en tienda).</li>
         <li>Se entrega <b>con el policía de la entrada</b>, a nombre de quien apartó.</li>
         <li>Tienes <b>1 a 2 días</b> para recogerla después del aviso. Si no pasas, regresa a bodega y <b>sigue apartada a tu nombre</b>: escríbenos y te la volvemos a dejar lista.</li>
       </ul></div>
@@ -737,7 +738,7 @@ const PAY={tarjeta:'Tarjeta (liga de pago Clip)',transferencia:'Transferencia'};
 let cli={n:'',t:'',p:'',u:false};
 try{ const v=JSON.parse(localStorage.getItem('zeke-cliente')||'null'); if(v&&typeof v==='object') cli={n:String(v.n||''),t:String(v.t||''),p:PAY[v.p]?v.p:'',u:false}; }catch(e){}
 const URG=200;
-const entregaTxt=()=>cli.u?`URGENTE: lista en 1 día hábil (+${money(URG)})`:'Normal: lista a partir de 3 días hábiles';
+const entregaTxt=()=>(cli.u?`URGENTE: lista en 1 día hábil (+${money(URG)})`:'Normal: lista a partir de 3 días hábiles')+' · Pick-up en tienda';
 function entregaHTML(attr){ return `<div><div class="cf-l">¿Para cuándo la quieres?</div><div class="pay ent">
       <button type="button" ${attr}="0" aria-pressed="${!cli.u}"><b>Normal</b><small>3 días hábiles · sin costo</small></button>
       <button type="button" ${attr}="1" aria-pressed="${cli.u}"><b>Urgente</b><small>1 día hábil · +${money(URG)}</small></button></div></div>`; }
@@ -876,6 +877,7 @@ function renderCart(){
       <div><div class="cf-l">Forma de pago</div><div class="pay">${Object.keys(PAY).map(k=>`<button type="button" data-cpay="${k}" aria-pressed="${cli.p===k}">${k==='tarjeta'?'Tarjeta':'Transferencia'}</button>`).join('')}</div></div>
       ${entregaHTML('data-curg')}
     </div>
+    <div style="font-size:13px;color:#55585e;margin:2px 0 10px">🛍️ <b>Solo pick-up</b> · por ahora no tenemos envío a domicilio</div>
     <div class="tot"><div class="r"><span>Subtotal · ${n} pieza${n>1?'s':''}</span><span>${money2(sub)}</span></div>${urg?`<div class="r"><span>Entrega urgente (1 día hábil)</span><span>+ ${money2(urg)}</span></div>`:''}${cli.p==='tarjeta'?`<div class="r"><span>Comisión tarjeta (Clip) 4%</span><span>+ ${money2(fee)}</span></div>`:''}<div class="r big"><span>Total</span><b>${money2(tot)}</b></div></div>
     <a class="wa" id="cart-go" target="_blank" rel="noopener">${WA_ICON}<span>Enviar pedido por WhatsApp</span></a><div class="miss" id="cart-miss" aria-live="polite"></div><div id="order-out"></div>
     <div class="pv-note">Te contestamos con la liga de pago (tarjeta) o los datos para transferencia. Tu pedido queda apartado al recibir el pago completo. Lista a partir de 3 días hábiles. Sin devoluciones, solo cambios de talla. <a href="#politicas">Ver políticas</a></div>
@@ -970,7 +972,7 @@ function openConfirm(k){
     <ul>
       <li>${cli.u?`<b>Entrega urgente:</b> tu prenda estará lista en <b>1 día hábil</b> (costo extra de ${money(URG)}).`:`Tu prenda estará lista para recoger <b>a partir de 3 días hábiles</b> desde que apartas. ¿La necesitas antes? Elige <b>Urgente</b> (1 día hábil, +${money(URG)}).`}</li>
       <li>El apartado se confirma <b>al recibir tu pago completo</b>.</li>
-      <li>Se recoge con el policía de la entrada, a nombre de quien aparta.</li>
+      <li><b>Solo pick-up:</b> por ahora no tenemos envío a domicilio. Recoges en tienda, con el policía de la entrada, a nombre de quien aparta.</li>
     </ul>
     <div class="warn">⚠️ Atención: no hay devoluciones. Solo cambios de talla, con la prenda en perfectas condiciones y con etiquetas.</div>
     <div class="tot">${n} pieza${n>1?'s':''} · Total ${money2(tot)}</div>
