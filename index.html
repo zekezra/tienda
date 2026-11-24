@@ -519,6 +519,7 @@ body.has-cart .inst,body.pv-open .inst{display:none}
 .sale .days b{font:400 clamp(30px,4vw,40px)/1 var(--serif);font-variation-settings:'opsz' 28}
 .sale .days em{font-style:normal;font-size:15px;color:#e1dbd0}
 @media (max-width:480px){.sale .days{grid-template-columns:repeat(2,minmax(0,1fr));width:100%}}
+#cfm-go.busy{opacity:.55;pointer-events:none}.shr-n{font-size:12.5px;color:#6b665d;text-align:center;margin:-2px 0 4px;line-height:1.4}
 .sep{margin:2px 0 0;font-size:12.5px;line-height:1.4;color:#8a857c;font-style:italic;letter-spacing:.01em}
 .vitrina #cartbar,.vitrina #hdr-cart,.vitrina .howto,.vitrina #ztoast,.vitrina .solo,.vitrina .pv-note,.vitrina #add-cart{display:none!important}
 .vnote{border-top:1px solid var(--line);padding-top:18px;display:grid;gap:12px}
@@ -1125,6 +1126,40 @@ render(); syncHash();
   const _r=renderCartBar; renderCartBar=function(){ _r(); updBadge(); }; updBadge();
   const syncOpen=()=>document.body.classList.toggle('pv-open',!document.getElementById('pv').hidden||!document.getElementById('cartpv').hidden);
   new MutationObserver(syncOpen).observe(document.body,{subtree:true,attributes:true,attributeFilter:['hidden']});
+})();
+/* ---- pedido como IMAGEN por WhatsApp (Web Share con archivo) ---- */
+(function(){
+  let ok=false; try{ ok=!!(window.isSecureContext&&navigator.share&&navigator.canShare&&navigator.canShare({files:[new File([new Blob(['x'],{type:'image/png'})],'t.png',{type:'image/png'})]})); }catch(e){}
+  if(!ok) return;
+  let pre=null, tok=0;
+  const _oc=openConfirm;
+  openConfirm=function(k){ _oc(k); pre=null; const my=++tok;
+    const go=document.getElementById('cfm-go'); if(!go) return;
+    const sp=go.querySelector('span'); go.classList.add('busy'); go.setAttribute('aria-disabled','true'); sp.textContent='Preparando tu pedido…';
+    const nt=document.createElement('div'); nt.className='shr-n'; nt.innerHTML='Se abrirá la opción de compartir: elige <b>WhatsApp</b> y el chat de <b>Zeke · 55 8553 1331</b>.'; go.after(nt);
+    const o=ensureOrder(k);
+    drawOrder(o.num,itemsFor(k)).then(b=>{ if(my!==tok||!b) throw 0;
+      pre={k,num:o.num,blob:b,file:new File([b],'Pedido-'+o.num+'.png',{type:'image/png'})};
+      go.classList.remove('busy'); go.removeAttribute('aria-disabled'); sp.textContent='Sí, enviar mi pedido por WhatsApp';
+    }).catch(()=>{ if(my!==tok) return; go.classList.remove('busy'); go.removeAttribute('aria-disabled'); sp.textContent='Sí, apartar por WhatsApp'; nt.remove(); });
+  };
+  function done(p){ const box=boxFor(p.k); if(!box) return; const url=URL.createObjectURL(p.blob);
+    box.innerHTML=`<div class="ord"><h3>Tu pedido ${esc(p.num)}</h3><span class="hint">Si ya lo enviaste, listo: te contestamos por WhatsApp con los datos de pago.</span>
+    <img src="${url}" alt="Imagen del pedido ${esc(p.num)}">
+    <button type="button" class="alt" data-reshare="1">Volver a compartir la imagen</button>
+    <a class="alt" href="${url}" download="Pedido-${esc(p.num)}.png" style="text-align:center;text-decoration:none">Guardar imagen</a></div>`;
+    box.querySelector('[data-reshare]').onclick=()=>navigator.share({files:[p.file],text:'Hola, quiero apartar mi pedido '+p.num+'.'}).catch(()=>{});
+    box.scrollIntoView({behavior:'smooth',block:'nearest'}); }
+  document.getElementById('cfm').addEventListener('click',e=>{
+    const go=e.target.closest('#cfm-go'); if(!go) return;
+    e.preventDefault(); e.stopImmediatePropagation();
+    if(!pre||pre.k!==cfmK) return;            /* aún preparando */
+    const p=pre;
+    navigator.share({files:[p.file],text:'Hola, quiero apartar mi pedido '+p.num+'.'})
+      .then(()=>{ closeConfirm(); done(p); })
+      .catch(err=>{ if(err&&err.name==='AbortError') return;   /* lo cerró: sigue en la confirmación */
+        window.open(msgFor(p.k),'_blank','noopener'); closeConfirm(); done(p); });
+  },true);
 })();
 
 (function(){ const v=document.getElementById('hero-v'); if(!v) return; const go=()=>{ const p=v.play(); if(p&&p.catch) p.catch(()=>{}); }; go(); document.addEventListener('visibilitychange',()=>{ if(!document.hidden) go(); }); document.addEventListener('touchstart',go,{once:true,passive:true}); })();
