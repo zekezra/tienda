@@ -1154,6 +1154,36 @@ render(); syncHash();
 
 (function(){ const v=document.getElementById('hero-v'); if(!v) return; const go=()=>{ const p=v.play(); if(p&&p.catch) p.catch(()=>{}); }; go(); document.addEventListener('visibilitychange',()=>{ if(!document.hidden) go(); }); document.addEventListener('touchstart',go,{once:true,passive:true}); })();
 
+/* ---- venta: se oculta sola al terminar; nota de pieza suelta ---- */
+(function(){
+  const v=document.getElementById('venta');
+  if(v&&Date.now()>new Date(v.dataset.end).getTime()) v.remove();
+  const _rp=renderPv; renderPv=function(){ _rp();
+    const info=document.querySelector('#pv .pv-info'); if(!info||openI==null) return;
+    const g=DATA[openI]; if(g.traje||info.querySelector('.sep')) return;
+    const pr=info.querySelector('.price'); if(!pr) return;
+    const txt=g.cat==='pantalon'?'También se vende solo el pantalón.':'También se vende solo el saco.';
+    pr.insertAdjacentHTML('afterend','<p class="sep">'+txt+'</p>');
+  };
+})();
+/* ---- guía de tallas ---- */
+(function(){
+  const sg=document.getElementById('sg'); if(!sg) return;
+  const open=()=>{ sg.hidden=false; sg.querySelector('.sg-p').scrollTop=0; };
+  const close=()=>{ sg.hidden=true; };
+  document.addEventListener('click',e=>{
+    if(e.target.closest('[data-sg]')){ e.preventDefault(); document.getElementById('drawer').hidden=true; open(); return; }
+    if(e.target.closest('#sg-x')||e.target===sg) close();
+  });
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&!sg.hidden) close(); });
+  const _rp=renderPv; renderPv=function(){ _rp();
+    const info=document.querySelector('#pv .pv-info'); if(!info) return;
+    const lbl=[...info.querySelectorAll('.lbl')].find(x=>/Tallas/i.test(x.textContent));
+    if(lbl&&!lbl.querySelector('.sg-link')) lbl.insertAdjacentHTML('beforeend','<button type="button" class="sg-link" data-sg="1">¿Cuál es mi talla?</button>');
+    const add=info.querySelector('#add-cart');
+    if(add&&!window.__VITRINA&&!info.querySelector('.try')) add.insertAdjacentHTML('beforebegin','<p class="try">Te recomendamos probártelo en tienda. Si no puedes venir, tienes cambio de talla hasta 30 días.</p>');
+  };
+})();
 /* ---- reel ---- */
 (function(){
   const box=document.getElementById('reel'); if(!box) return;
