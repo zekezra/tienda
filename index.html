@@ -5,19 +5,19 @@ html.zl,html.zl body{overflow:hidden!important}
 #zlock{position:fixed;inset:0;z-index:2147483000;background:#060504;overflow:hidden;transition:opacity 1s ease}
 #zlock.out{opacity:0;pointer-events:none}
 #zlock::before{content:"";position:absolute;inset:-40px;background:url(lock.jpg) center/cover;filter:blur(28px) brightness(.45)}#zlock .bx{position:absolute;top:50%;left:50%;height:max(100vh,177.78vw);height:max(100dvh,177.78vw);width:max(56.25vh,100vw);width:max(56.25dvh,100vw);transform:translate(-50%,-50%);container-type:size;background:url(lock.jpg) center/cover no-repeat;box-shadow:0 0 60px 30px #060504}@media (min-aspect-ratio:3/4){#zlock .bx{height:100vh;height:100dvh;width:56.25vh;width:56.25dvh}}
-#zlock .cd{position:absolute;left:0;right:0;top:68.4%;transform:translateY(-50%);text-align:center;font-family:"Bodoni Moda",Didot,"Times New Roman",serif;font-weight:400;font-size:2.4vh;font-size:2.4cqh;letter-spacing:.42em;padding-left:.42em;color:#c49a6c;opacity:.92;font-variant-numeric:tabular-nums;white-space:nowrap;text-shadow:0 0 12px rgba(196,154,108,.25)}
+#zlock .cd{position:absolute;left:0;right:0;top:67.4%;display:flex;justify-content:center;gap:2.6cqw;font-family:"Bodoni Moda",Didot,"Times New Roman",serif;color:#d2ab7c;font-variant-numeric:tabular-nums}#zlock .cd div{min-width:19cqw;padding:2.4cqw 1.2cqw 1.9cqw;border:1px solid rgba(196,154,108,.55);background:rgba(8,6,4,.35);text-align:center}#zlock .cd b{display:block;font-weight:400;font-size:8cqw;line-height:1;letter-spacing:.02em}#zlock .cd span{display:block;margin-top:1.4cqw;font-family:Jost,system-ui,sans-serif;font-size:1.9cqw;letter-spacing:.2em;padding-left:.2em;text-transform:uppercase;color:#a88a68}
 </style>
-<div class="bx"><div class="cd" id="zl-t" aria-live="off">00 00 00</div></div>
+<div class="bx"><div class="cd" aria-live="off"><div><b id="zl-h">00</b><span>Horas</span></div><div><b id="zl-m">00</b><span>Minutos</span></div><div><b id="zl-s">00</b><span>Segundos</span></div></div></div>
 <script>
 (function(){
   var el=document.getElementById('zlock'), end=new Date(el.dataset.until).getTime();
   if(Date.now()>=end || /[?&]ver=zeke/.test(location.search)){ el.remove(); return; }
   document.documentElement.classList.add('zl');
-  var t=document.getElementById('zl-t');
+  var h=document.getElementById('zl-h'),m=document.getElementById('zl-m'),sc=document.getElementById('zl-s');
   function p(n){return (n<10?'0':'')+n}
   function tick(){
     var d=Math.max(0,end-Date.now()), s=Math.floor(d/1000);
-    t.textContent=p(Math.floor(s/3600))+' '+p(Math.floor(s%3600/60))+' '+p(s%60);
+    h.textContent=p(Math.floor(s/3600)); m.textContent=p(Math.floor(s%3600/60)); sc.textContent=p(s%60);
     if(d<=0){ clearInterval(iv); el.classList.add('out'); document.documentElement.classList.remove('zl'); setTimeout(function(){el.remove();},1100); }
   }
   var iv=setInterval(tick,1000); tick();
