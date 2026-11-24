@@ -1,4 +1,13 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#141414"><link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"><link rel="apple-touch-icon" href="apple-touch-icon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Zeke"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="Sacos y pantalones stretch en Ciudad de México. Aparta por WhatsApp y recoge en tienda."></head><body>
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#141414"><link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"><link rel="apple-touch-icon" href="apple-touch-icon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Zeke"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="Sacos y pantalones stretch en Ciudad de México. Aparta por WhatsApp y recoge en tienda."><style>
+.fitrow:has(.fitl){display:flex;flex-direction:column;align-items:stretch;gap:6px;margin-bottom:6px}
+.fitrow .lbl.fitl{font-family:inherit;font-size:14px;font-weight:700;color:#141414;letter-spacing:.06em;text-transform:uppercase;width:auto;border-bottom:1px solid #e3e1dc;padding-bottom:3px}
+.altpart{border:1.5px solid #141414;border-radius:12px;padding:12px 12px 6px;margin:4px 0 12px;background:#fff}
+.altpart h4{margin:0 0 10px;font-size:16px;font-weight:700;color:#141414;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.altpart h4 b{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:#141414;color:#fff;font-size:13px}
+.altpart h4 small{font-weight:400;font-size:12.5px;color:#777;font-style:italic}
+.altpart .fitrow .lbl.fitl{font-size:13px}
+</style>
+</head><body>
 <div id="zlock" data-until="2026-11-24T20:30:00-06:00" role="img" aria-label="Zeke stretch · muy pronto">
 <style>
 html.zl,html.zl body{overflow:hidden!important}
@@ -776,16 +785,16 @@ const money=n=>new Intl.NumberFormat('es-MX',{style:'currency',currency:'MXN',ma
 function title(g){ return (g.cat==='pantalon'?'Pantalón':g.tipo)+' '+g.model; }
 function sub(g){ const s=g.cat==='pantalon'?g.tipo.replace(/^Pantalón\s*/,''):''; return s?s.charAt(0).toUpperCase()+s.slice(1):''; }
 function sizesHTML(c,i){
-  if(DATA[i].traje&&!c._p&&!c._s){ return `<div class="lbl" style="margin-top:2px">Saco</div>`+sizesHTML(Object.assign({},c,{_s:1}),i)+`<div class="lbl" style="margin-top:6px">Pantalón · puede ser otra talla</div>`+sizesHTML(Object.assign({},c,{_p:1,sizes:c.psizes,avail:c.pavail}),i); }
+  if(DATA[i].traje&&!c._p&&!c._s){ return `<div class="altpart"><h4><b>1</b> Talla del saco</h4>`+sizesHTML(Object.assign({},c,{_s:1}),i)+`</div><div class="altpart"><h4><b>2</b> Talla del pantalón <small>puede ser otra talla</small></h4>`+sizesHTML(Object.assign({},c,{_p:1,sizes:c.psizes,avail:c.pavail}),i)+`</div>`; }
   const part=c._p?'p':(c._s?'s':''); const cur=part==='p'?tP[i]:(part==='s'?tS[i]:sizeSel[i]);
   const av=new Set(c.avail); const lbl=k=>esc(k.replace(/[RSL]$/,''));
   const sp=k=>av.has(k)?`<button type="button" data-g="${i}" data-s="${esc(k)}" data-part="${part}" aria-pressed="${cur===k}" aria-label="Talla ${esc(fitName(k))}">${lbl(k)}</button>`:`<span class="no" aria-label="Talla ${esc(fitName(k))} agotada">${lbl(k)}</span>`;
   if(c.sizes.every(k=>/^\d+[RSL]$/.test(k))){
     return ['R','S','L'].filter(f=>c.sizes.some(k=>k.endsWith(f))).map(f=>{
       const ks=c.sizes.filter(k=>k.endsWith(f)).sort((a,b)=>parseInt(a)-parseInt(b));
-      return `<div class="fitrow"><span class="lbl">${FIT[f]}</span><div class="sizes">${ks.map(sp).join('')}</div></div>`;}).join('');
+      return `<div class="fitrow"><span class="lbl fitl">${FIT[f]}</span><div class="sizes">${ks.map(sp).join('')}</div></div>`;}).join('');
   }
-  return `<div class="fitrow"><span class="lbl">Cintura</span><div class="sizes">${c.sizes.slice().sort((a,b)=>a-b).map(sp).join('')}</div></div>`;
+  return `<div class="fitrow"><span class="lbl fitl">Cintura</span><div class="sizes">${c.sizes.slice().sort((a,b)=>a-b).map(sp).join('')}</div></div>`;
 }
 function imgsOf(c){ const l=[]; if(c.big||c.photo) l.push(c.big||c.photo); (c.more||[]).forEach(u=>l.push(u)); return l; }
 let openI=null, imgI=0;
