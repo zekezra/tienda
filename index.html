@@ -519,7 +519,7 @@ body.has-cart .inst,body.pv-open .inst{display:none}
 .sale .days b{font:400 clamp(30px,4vw,40px)/1 var(--serif);font-variation-settings:'opsz' 28}
 .sale .days em{font-style:normal;font-size:15px;color:#e1dbd0}
 @media (max-width:480px){.sale .days{grid-template-columns:repeat(2,minmax(0,1fr));width:100%}}
-.sep{margin:0;font-size:13.5px;line-height:1.45;color:#55514a;border-left:2px solid #d4af62;padding-left:10px}
+.sep{margin:2px 0 0;font-size:12.5px;line-height:1.4;color:#8a857c;font-style:italic;letter-spacing:.01em}
 .vitrina #cartbar,.vitrina #hdr-cart,.vitrina .howto,.vitrina #ztoast,.vitrina .solo,.vitrina .pv-note,.vitrina #add-cart{display:none!important}
 .vnote{border-top:1px solid var(--line);padding-top:18px;display:grid;gap:12px}
 .vnote p{margin:0;font-size:14.5px;line-height:1.5;color:#45423d}
@@ -529,7 +529,7 @@ body.has-cart .inst,body.pv-open .inst{display:none}
 </style>
 
 <script>window.__VITRINA=true</script>
-<div class="annc"><span class="win"><span class="rot"><span>Venta · dom 29 nov y jue 3 dic</span><span>Puedes comprar solo el saco o solo el pantalón</span><span>Muy pronto: aparta en línea</span><span>Ciudad de México · atención por WhatsApp</span></span></span></div>
+<div class="annc"><span class="win"><span class="rot"><span>Venta · dom 29 nov y jue 3 dic</span><span>Tela stretch · cómoda todo el día</span><span>Muy pronto: aparta en línea</span><span>Ciudad de México · atención por WhatsApp</span></span></span></div>
 <header class="shead"><div class="in">
   <button class="ib menu-b" type="button" id="menu-b" aria-label="Menú"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h18"/></svg></button>
   <nav class="snav" aria-label="Secciones"><a href="#nuevo">Novedades</a><a href="#tienda" data-go="saco">Sacos</a><a href="#tienda" data-go="pantalon">Pantalones</a><a href="#tienda" data-go="nino">Niño</a></nav>
@@ -582,7 +582,7 @@ body.has-cart .inst,body.pv-open .inst{display:none}
   </section>
   <div class="perks">
     <div><b>Tela stretch</b><span>86% rayón, 14% spandex. Cómodo todo el día.</span></div>
-    <div><b>Solo saco o solo pantalón</b><span>No tienes que llevar el traje completo: compra solo la pieza que necesitas.</span></div>
+    <div><b>Corte slim</b><span>Hecho para moverte con elegancia.</span></div>
     <div><b>Cambios 30 días</b><span>Cambio de talla con etiquetas.</span></div>
     <div><b>Atención directa</b><span>Pregúntanos por WhatsApp tu talla y color.</span></div>
   </div>
@@ -1021,7 +1021,7 @@ render(); syncHash();
     const info=document.querySelector('#pv .pv-info'); if(!info||openI==null) return;
     const g=DATA[openI]; if(g.traje||info.querySelector('.sep')) return;
     const pr=info.querySelector('.price'); if(!pr) return;
-    const txt=g.cat==='pantalon'?'Puedes comprar solo el pantalón, sin el saco.':'Puedes comprar solo el saco, sin el pantalón.';
+    const txt=g.cat==='pantalon'?'También se vende solo el pantalón.':'También se vende solo el saco.';
     pr.insertAdjacentHTML('afterend','<p class="sep">'+txt+'</p>');
   };
 })();
