@@ -11,6 +11,10 @@
 #cfm:has(#cfm-ok:not(:checked)) #cfm-go{opacity:.4}
 .cfm-ok.shake{animation:zsh .35s;border-color:#c8102e}
 @keyframes zsh{0%,100%{transform:none}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.nino-note{grid-column:1/-1;border:1.5px solid #141414;border-radius:12px;padding:14px 16px;margin:0 0 6px;background:#fff;display:flex;flex-direction:column;gap:4px;font-size:15px;color:#141414}
+.nino-note b{font-size:16px;margin-bottom:2px}
+.nino-note span::before{content:"· ";font-weight:700}
+.nino-note em{color:#777;font-size:13.5px;margin-top:2px}
 </style>
 </head><body>
 <div id="zlock" data-until="2026-11-24T20:30:00-06:00" role="img" aria-label="Zeke stretch · muy pronto">
@@ -737,6 +741,7 @@ const CATS=[['all','Todo'],['saco','Sacos'],['pantalon','Pantalones'],['nino','N
 const FIT={R:'Regular',S:'Corto',L:'Largo'};
 /* Traje Altos: saco + pantalón Altos se venden juntos */
 const TRAJE_ALTOS=4000;
+const NINO_NOTE='<div class="nino-note"><b>Para niño, por ahora tenemos:</b><span>Saco con capucha · tallas 12 a 20</span><span>Pantalones · tallas 8 a 20</span><em>Muy pronto más modelos.</em></div>';
 (function(){ const si=DATA.findIndex(g=>/altos/i.test(g.brand)&&g.cat==='saco'), pi=DATA.findIndex(g=>/altos/i.test(g.brand)&&g.cat==='pantalon');
   if(si<0||pi<0) return; const gs=DATA[si], gp=DATA[pi];
   const cols=gs.colors.map(cs=>{ const cp=gp.colors.find(x=>x.color===cs.color); if(!cp) return null; const both=cs.avail.length&&cp.avail.length;
@@ -805,7 +810,7 @@ function imgsOf(c){ const l=[]; if(c.big||c.photo) l.push(c.big||c.photo); (c.mo
 let openI=null, imgI=0;
 function render(){
   document.getElementById('filters').innerHTML=CATS.map(([k,l])=>`<button class="chip" data-cat="${k}" aria-pressed="${cat===k}">${l}</button>`).join('');
-  document.getElementById('grid').innerHTML=DATA.map((g,i)=>{
+  document.getElementById('grid').innerHTML=(cat==='nino'?NINO_NOTE:'')+DATA.map((g,i)=>{
     if(cat!=='all'&&(g.cat==='pantalon'&&/^ni[ñn]o/i.test(g.model)?'nino':g.cat)!==cat) return '';
     const c=g.colors[pick[i]]; const n=imgsOf(c).length; const agot=!c.avail.length;
     return `<article class="card" data-open="${i}"><button class="ph" type="button" data-open="${i}" aria-label="Ver ${esc(title(g)+' '+c.color)}">${c.photo?`<img src="${c.photo}" alt="${esc(title(g)+' '+c.color)}" loading="lazy">`:sil(g.cat,c.hex)+`<span class="soon">Foto próximamente</span>`}<span class="brand">${esc(g.brand)}</span>${n>1?`<span class="more">${n} fotos</span>`:''}${agot?`<span class="more" style="left:6px;right:auto;background:#b3261e">Agotado</span>`:''}</button>
