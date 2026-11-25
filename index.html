@@ -741,7 +741,7 @@ const CATS=[['all','Todo'],['saco','Sacos'],['pantalon','Pantalones'],['nino','N
 const FIT={R:'Regular',S:'Corto',L:'Largo'};
 /* Traje Altos: saco + pantalón Altos se venden juntos */
 const TRAJE_ALTOS=4000;
-const NINO_NOTE='<div class="nino-note"><b>Para niño, por ahora tenemos:</b><span>Saco con capucha · tallas 12 a 20</span><span>Pantalones · tallas 8 a 20</span><em>Muy pronto más modelos.</em></div>';
+const NINO_NOTE='<div class="nino-note"><b>Para niño, por ahora tenemos:</b><span>Saco con capucha · tallas 12 a 20</span><span>Pantalones · tallas 8 a 20</span><em>¿Buscas otra prenda para niño? <a href="https://wa.me/525585531331?text=Hola%20Zeke%2C%20busco%20ropa%20para%20ni%C3%B1o" target="_blank" rel="noopener" style="color:#141414;font-weight:600">Escríbenos por WhatsApp</a> y te avisamos cuando llegue.</em></div>';
 (function(){ const si=DATA.findIndex(g=>/altos/i.test(g.brand)&&g.cat==='saco'), pi=DATA.findIndex(g=>/altos/i.test(g.brand)&&g.cat==='pantalon');
   if(si<0||pi<0) return; const gs=DATA[si], gp=DATA[pi];
   const cols=gs.colors.map(cs=>{ const cp=gp.colors.find(x=>x.color===cs.color); if(!cp) return null; const both=cs.avail.length&&cp.avail.length;
