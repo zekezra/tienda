@@ -6,6 +6,11 @@
 .altpart h4 b{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:#141414;color:#fff;font-size:13px}
 .altpart h4 small{font-weight:400;font-size:12.5px;color:#777;font-style:italic}
 .altpart .fitrow .lbl.fitl{font-size:13px}
+.cfm-ok{display:flex;gap:10px;align-items:flex-start;margin:6px 0 12px;font-size:14px;line-height:1.35;color:#141414;cursor:pointer;padding:10px 12px;border:1.5px solid #141414;border-radius:10px}
+.cfm-ok input{width:20px;height:20px;flex:none;margin:0;accent-color:#141414}
+#cfm:has(#cfm-ok:not(:checked)) #cfm-go{opacity:.4}
+.cfm-ok.shake{animation:zsh .35s;border-color:#c8102e}
+@keyframes zsh{0%,100%{transform:none}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
 </style>
 </head><body>
 <div id="zlock" data-until="2026-11-24T20:30:00-06:00" role="img" aria-label="Zeke stretch · muy pronto">
@@ -847,7 +852,7 @@ function syncModel(){ const m=/^#modelo-(\d+)$/.exec(location.hash); if(m&&DATA[
 const money2=n=>new Intl.NumberFormat('es-MX',{style:'currency',currency:'MXN',minimumFractionDigits:0,maximumFractionDigits:2}).format(n);
 const FEE=0.04;
 let cart=[], cartOpen=false, clearArm=false, toastT=null;
-try{ const v=JSON.parse(localStorage.getItem('zeke-carrito')||'[]'); if(Array.isArray(v)) cart=v.filter(x=>x&&x.t&&x.color&&x.s).map(x=>({t:String(x.t),brand:String(x.brand||''),color:String(x.color),s:String(x.s),q:Math.max(1,Math.min(9,parseInt(x.q)||1)),price:+x.price||0})); }catch(e){}
+try{ const v=JSON.parse(localStorage.getItem('zeke-carrito')||'[]'); if(Array.isArray(v)) cart=v.filter(x=>x&&x.t&&x.color&&x.s).map(x=>({t:String(x.t),brand:String(x.brand||''),color:String(x.color),s:String(x.s),q:Math.max(1,Math.min(2,parseInt(x.q)||1)),price:+x.price||0})); }catch(e){}
 function findItem(x){ for(const g of DATA){ if(title(g)!==x.t||g.brand!==x.brand) continue; const c=g.colors.find(c=>c.color===x.color); if(c) return {g,c}; } return null; }
 cart.forEach(x=>{ const f=findItem(x); if(f){ x.price=f.c.price||x.price; x.photo=f.c.photo||''; x.hex=f.c.hex; x.cat=f.g.cat; x.out=!avHas(f.c,x.s); } else x.out=true; });
 function saveCart(){ try{ localStorage.setItem('zeke-carrito',JSON.stringify(cart.map(({t,brand,color,s,q,price})=>({t,brand,color,s,q,price})))); }catch(e){} }
@@ -856,7 +861,7 @@ function cartTotals(){ const sub=cart.reduce((a,x)=>a+(x.price||0)*x.q,0); const
 function addToCart(i){
   const g=DATA[i], c=g.colors[pick[i]], s=sizeSel[i]; if(!s) return;
   const t=title(g); const x=cart.find(y=>y.t===t&&y.brand===g.brand&&y.color===c.color&&y.s===s);
-  if(x) x.q=Math.min(9,x.q+1); else cart.push({t,brand:g.brand,color:c.color,s,q:1,price:c.price||0,photo:c.photo||'',hex:c.hex,cat:g.cat});
+  if(x) x.q=Math.min(2,x.q+1); else cart.push({t,brand:g.brand,color:c.color,s,q:1,price:c.price||0,photo:c.photo||'',hex:c.hex,cat:g.cat});
   saveCart(); renderCartBar(); toast(`Agregado: ${t} ${c.color}, talla ${fitName(s)}`);
 }
 function toast(msg){ const t=document.getElementById('ztoast'); t.innerHTML=`<span>${esc(msg)}</span><button type="button" id="ztoast-go">Ver carrito</button>`; t.hidden=false; clearTimeout(toastT); toastT=setTimeout(()=>t.hidden=true,3800); }
@@ -984,9 +989,10 @@ function openConfirm(k){
       <li><b>Solo pick-up:</b> por ahora no tenemos envío a domicilio. Recoges en tienda, con el policía de la entrada, a nombre de quien aparta.</li>
     </ul>
     <div style="font-size:13.5px;color:#55585e;margin:2px 0 10px">¿Aún no nos tienes guardados? <a href="zeke.vcf" style="color:#c8102e;font-weight:700;text-decoration:underline">Guardar contacto de Zeke</a> para encontrarnos fácil en WhatsApp.</div>
+    <div style="font-size:13.5px;color:#141414;margin:2px 0 10px"><b>Si no recibimos tu pago, tu pedido se cancela automáticamente.</b></div>
     <div class="warn">⚠️ Atención: no hay devoluciones. Solo cambios de talla, con la prenda en perfectas condiciones y con etiquetas.</div>
     <div class="tot">${n} pieza${n>1?'s':''} · Total ${money2(tot)}</div>
-    <div>¿Estás seguro de que quieres apartar?</div>
+    <label class="cfm-ok"><input type="checkbox" id="cfm-ok"><span>Confirmo mi pedido y realizaré el pago completo para apartarlo.</span></label>
     <a class="wa" id="cfm-go" href="${esc(msgFor(k))}" target="_blank" rel="noopener">${WA_ICON}<span>Sí, apartar por WhatsApp</span></a>
     <button type="button" class="no" id="cfm-no">No, regresar</button></div>`;
   el.hidden=false; document.getElementById('cfm-go').focus();
@@ -1017,7 +1023,7 @@ document.getElementById('cartpv').addEventListener('click',e=>{
   if(e.target.closest('#cart-close,#cart-close2')){ closeCart(); return; }
   if(e.target.closest('#cart-go')){ e.preventDefault(); if(cliMissing().length) return; openConfirm('cart'); return; }
   const cu=e.target.closest('[data-curg]'); if(cu){ cli.u=cu.dataset.curg==='1'; keepScroll(renderCart); return; }
-  const q=e.target.closest('[data-q]'); if(q){ const x=cart[+q.dataset.q]; if(x){ x.q=Math.max(1,Math.min(9,x.q+(+q.dataset.d))); saveCart(); } clearArm=false; keepScroll(renderCart); return; }
+  const q=e.target.closest('[data-q]'); if(q){ const x=cart[+q.dataset.q]; if(x){ x.q=Math.max(1,Math.min(2,x.q+(+q.dataset.d))); saveCart(); } clearArm=false; keepScroll(renderCart); return; }
   const r=e.target.closest('[data-rm]'); if(r){ cart.splice(+r.dataset.rm,1); saveCart(); clearArm=false; keepScroll(renderCart); return; }
   const py=e.target.closest('[data-cpay]'); if(py){ cli.p=py.dataset.cpay; saveCli(); keepScroll(renderCart); return; }
   if(e.target.closest('#cart-clear')){ if(!clearArm){ clearArm=true; keepScroll(renderCart); return; } clearArm=false; cart=[]; saveCart(); renderCart(); return; }
@@ -1205,5 +1211,13 @@ render(); syncHash();
 </script>
 
 <script>(function(){var n=0,t=0,el=document.getElementById('gc-tog');if(!el)return;el.addEventListener('click',function(){var now=Date.now();if(now-t>3000)n=0;t=now;if(++n<5)return;n=0;var off;try{off=localStorage.getItem('skipgc')==='t';if(off)localStorage.removeItem('skipgc');else localStorage.setItem('skipgc','t');}catch(e){return;}var m=document.createElement('div');m.textContent=off?'Visitas de este aparato: SE CUENTAN otra vez':'Listo: ya no se cuentan las visitas de este aparato';m.style.cssText='position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:#141414;color:#fff;padding:12px 16px;border-radius:10px;z-index:99999;font:15px/1.3 system-ui;max-width:88vw;text-align:center';document.body.appendChild(m);setTimeout(function(){m.remove()},3500);});})();</script>
+<script>
+document.addEventListener('click',function(e){
+  var go=e.target.closest&&e.target.closest('#cfm-go'); if(!go) return;
+  var ok=document.getElementById('cfm-ok'); if(!ok||ok.checked) return;
+  e.preventDefault(); e.stopImmediatePropagation();
+  var l=ok.closest('.cfm-ok'); l.classList.remove('shake'); void l.offsetWidth; l.classList.add('shake');
+},true);
+</script>
 <script data-goatcounter="https://zekemx.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body></html>
