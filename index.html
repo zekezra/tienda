@@ -653,7 +653,7 @@ body.has-cart .inst,body.pv-open .inst{display:none}
     <h2>Políticas</h2>
     <div class="cols">
       <div><h3>Apartados</h3><ul>
-        <li>Tu apartado se confirma <b>solo al recibir el pago completo</b> (liga de pago Clip o transferencia).</li>
+        <li>Tu apartado se confirma <b>solo al recibir el pago completo</b> (liga de pago Clip o transferencia). <b>Mismo precio con tarjeta o transferencia.</b></li>
         <li>Tu prenda está lista para recoger <b>a partir de 3 días hábiles</b> desde que apartas. Si la necesitas antes, la entrega <b>urgente en 1 día hábil</b> cuesta <b>$200</b> extra.</li>
         <li>Te avisamos por WhatsApp cuando tu prenda esté lista.</li>
         <li>Por ahora <b>no tenemos envío a domicilio</b>: solo <b>pick-up</b> (recoger en tienda).</li>
@@ -775,7 +775,7 @@ function cfHTML(i){
   return `<div class="cf"><div class="lbl">Tus datos para el apartado</div>
     <label>Nombre<input id="cf-n" type="text" autocomplete="name" placeholder="Nombre y apellido" value="${esc(cli.n)}"></label>
     <label>Teléfono (WhatsApp)<input id="cf-t" type="tel" inputmode="tel" autocomplete="tel" placeholder="55 1234 5678" value="${esc(cli.t)}"></label>
-    <div><div class="cf-l">Forma de pago</div><div class="pay">${Object.entries(PAY).map(([k,l])=>`<button type="button" data-pay="${k}" aria-pressed="${cli.p===k}">${k==='tarjeta'?'Tarjeta':'Transferencia'}</button>`).join('')}</div></div>
+    <div><div class="cf-l">Forma de pago</div><div class="pay">${Object.entries(PAY).map(([k,l])=>`<button type="button" data-pay="${k}" aria-pressed="${cli.p===k}">${k==='tarjeta'?'Tarjeta*':'Transferencia'}</button>`).join('')}</div><div style="font-size:12.5px;color:#55585e;margin-top:6px">💳 Tarjeta o transferencia, <b>al mismo precio</b>.</div></div>
     ${entregaHTML('data-urg')}
   </div><a class="wa" id="wa-go" target="_blank" rel="noopener">${WA_ICON}<span></span></a><div class="miss" id="cf-miss" aria-live="polite"></div><div id="solo-out"></div>`;
 }
@@ -893,11 +893,11 @@ function renderCart(){
     <div class="cf"><div class="lbl">Tus datos para el pedido</div>
       <label>Nombre<input id="cc-n" type="text" autocomplete="name" placeholder="Nombre y apellido" value="${esc(cli.n)}"></label>
       <label>Teléfono (WhatsApp)<input id="cc-t" type="tel" inputmode="tel" autocomplete="tel" placeholder="55 1234 5678" value="${esc(cli.t)}"></label>
-      <div><div class="cf-l">Forma de pago</div><div class="pay">${Object.keys(PAY).map(k=>`<button type="button" data-cpay="${k}" aria-pressed="${cli.p===k}">${k==='tarjeta'?'Tarjeta':'Transferencia'}</button>`).join('')}</div></div>
+      <div><div class="cf-l">Forma de pago</div><div class="pay">${Object.keys(PAY).map(k=>`<button type="button" data-cpay="${k}" aria-pressed="${cli.p===k}">${k==='tarjeta'?'Tarjeta*':'Transferencia'}</button>`).join('')}</div><div style="font-size:12.5px;color:#55585e;margin-top:6px">💳 Tarjeta o transferencia, <b>al mismo precio</b>.</div></div>
       ${entregaHTML('data-curg')}
     </div>
     <div style="font-size:13px;color:#55585e;margin:2px 0 10px">🛍️ <b>Solo pick-up</b> · por ahora no tenemos envío a domicilio</div>
-    <div class="tot"><div class="r"><span>Subtotal · ${n} pieza${n>1?'s':''}</span><span>${money2(sub)}</span></div>${urg?`<div class="r"><span>Entrega urgente (1 día hábil)</span><span>+ ${money2(urg)}</span></div>`:''}<div class="r big"><span>Total</span><b>${money2(tot)}</b></div></div>
+    <div class="tot"><div class="r"><span>Subtotal · ${n} pieza${n>1?'s':''}</span><span>${money2(sub)}</span></div>${urg?`<div class="r"><span>Entrega urgente (1 día hábil)</span><span>+ ${money2(urg)}</span></div>`:''}<div class="r big"><span>Total</span><b>${money2(tot)}</b></div>${cli.p==='tarjeta'?'<div style="font-size:12px;color:#6b6e75;margin-top:6px">*Aplican restricciones al pagar con tarjeta.</div>':''}</div>
     <a class="wa" id="cart-go" target="_blank" rel="noopener">${WA_ICON}<span>Enviar pedido por WhatsApp</span></a><div class="miss" id="cart-miss" aria-live="polite"></div><div id="order-out"></div>
     <div class="pv-note">Te contestamos con la liga de pago (tarjeta) o los datos para transferencia. Tu pedido queda apartado al recibir el pago completo. Lista a partir de 3 días hábiles. Sin devoluciones, solo cambios de talla. <a href="#politicas">Ver políticas</a></div>
     <button type="button" class="linkbtn" id="cart-clear">${clearArm?'¿Seguro? Toca otra vez para vaciar':'Vaciar carrito'}</button>`
@@ -918,7 +918,7 @@ function msgFor(k){
   const L=[`🧾 *PEDIDO ${num}*`,'Catálogo Zeke stretch by Hat Box','━━━━━━━━━━━━━━'];
   items.forEach((x,j)=>{ L.push(`*${j+1}. ${x.t}${/altos/i.test(x.brand||'')&&!/altos/i.test(x.t)?' · Altos':''}*`); L.push(`${x.color} · Talla ${fitName(x.s)}`); L.push(x.q>1?`${x.q} piezas × ${money2(x.price)} = *${money2(x.price*x.q)}*`:(x.price?`*${money2(x.price)}*`:'Precio por confirmar')); if(j<items.length-1) L.push(''); });
   L.push('━━━━━━━━━━━━━━',`Subtotal (${n} pieza${n>1?'s':''}): ${money2(sub)}`); if(urg) L.push(`⚡ *Entrega URGENTE 1 día hábil: +${money2(urg)}*`); 
-  L.push(`*TOTAL: ${money2(tot)}*`,'━━━━━━━━━━━━━━',`*Cliente:* ${cli.n.trim()}`,`*Teléfono:* ${cli.t.trim()}`,`*Pago:* ${PAY[cli.p]||''}`,`*Entrega:* ${entregaTxt()}`,'Acepto: no hay devoluciones, solo cambios de talla.','',cli.p==='transferencia'?'¿Me mandan los datos para la transferencia? Gracias.':'¿Me mandan la liga de pago? Gracias.');
+  L.push(`*TOTAL: ${money2(tot)}*`,'━━━━━━━━━━━━━━',`*Cliente:* ${cli.n.trim()}`,`*Teléfono:* ${cli.t.trim()}`,`*Pago:* ${PAY[cli.p]||''}${cli.p==='tarjeta'?' *(aplican restricciones)*':''}`,`*Entrega:* ${entregaTxt()}`,'Acepto: no hay devoluciones, solo cambios de talla.','',cli.p==='transferencia'?'¿Me mandan los datos para la transferencia? Gracias.':'¿Me mandan la liga de pago? Gracias.');
   return 'https://wa.me/'+WA+'?text='+encodeURIComponent(L.join('\n'));
 }
 const boxFor=k=>document.getElementById(k==='cart'?'order-out':'solo-out');
@@ -937,7 +937,7 @@ async function drawOrder(num,items){
   try{ await document.fonts.ready; }catch(e){}
   const W=1080, P=56, RH=230, n=items.length;
   const {sub,urg,fee,tot,n:np}=totalsOf(items);
-  const H=300+n*RH+60+(fee?230:170)+(urg?54:0)+260+40+40;
+  const H=300+n*RH+60+(fee?230:170)+(urg?54:0)+260+40+40+(cli.p==='tarjeta'?40:0);
   const cv=document.createElement('canvas'); cv.width=W; cv.height=H; const c=cv.getContext('2d');
   const F=(w,sz)=>`${w} ${sz}px Archivo, -apple-system, Helvetica, Arial, sans-serif`;
   const GOLD='#c99a3c', INK='#15181e', MUT='#5b6370', LINE='#e2e4e9';
@@ -975,11 +975,12 @@ async function drawOrder(num,items){
   y+=10; c.fillStyle='#f4f5f7'; c.fillRect(P,y,W-2*P,200);
   c.fillStyle=MUT; c.font=F(600,26); c.fillText('CLIENTE',P+30,y+48);
   c.fillStyle=INK; c.font=F(700,40); c.fillText(fitText(c,cli.n.trim(),W-2*P-60),P+30,y+102);
-  c.font=F(500,32); c.fillStyle=INK; c.fillText(`Tel. ${cli.t.trim()}  ·  Pago: ${cli.p==='tarjeta'?'Tarjeta (Clip)':'Transferencia'}`,P+30,y+156);
+  c.font=F(500,32); c.fillStyle=INK; c.fillText(`Tel. ${cli.t.trim()}  ·  Pago: ${cli.p==='tarjeta'?'Tarjeta (Clip)*':'Transferencia'}`,P+30,y+156);
   y+=250;
   c.fillStyle=MUT; c.font=F(500,26); c.textAlign='center';
   c.fillText('Zeke stretch by Hat Box México · WhatsApp 55 8553 1331',W/2,y); c.fillText('El pedido se aparta al recibir el pago completo.',W/2,y+40);
   c.fillText(cli.u?'Entrega urgente: lista en 1 día hábil. Sin devoluciones, solo cambios de talla.':'Lista a partir de 3 días hábiles. Sin devoluciones, solo cambios de talla.',W/2,y+80);
+  if(cli.p==='tarjeta') c.fillText('*Aplican restricciones al pagar con tarjeta.',W/2,y+120);
   return await new Promise(r=>cv.toBlob(r,'image/png'));
 }
 let cfmK=null;
