@@ -653,7 +653,7 @@ body.has-cart .inst,body.pv-open .inst{display:none}
     <h2>Políticas</h2>
     <div class="cols">
       <div><h3>Apartados</h3><ul>
-        <li>Tu apartado se confirma <b>solo al recibir el pago completo</b> (liga de pago Clip o transferencia). <b>Mismo precio con tarjeta o transferencia.</b></li>
+        <li>Tu apartado se confirma <b>solo al recibir el pago completo</b> (liga de pago Clip o transferencia).</li>
         <li>Tu prenda está lista para recoger <b>a partir de 3 días hábiles</b> desde que apartas. Si la necesitas antes, la entrega <b>urgente en 1 día hábil</b> cuesta <b>$200</b> extra.</li>
         <li>Te avisamos por WhatsApp cuando tu prenda esté lista.</li>
         <li>Por ahora <b>no tenemos envío a domicilio</b>: solo <b>pick-up</b> (recoger en tienda).</li>
@@ -775,7 +775,7 @@ function cfHTML(i){
   return `<div class="cf"><div class="lbl">Tus datos para el apartado</div>
     <label>Nombre<input id="cf-n" type="text" autocomplete="name" placeholder="Nombre y apellido" value="${esc(cli.n)}"></label>
     <label>Teléfono (WhatsApp)<input id="cf-t" type="tel" inputmode="tel" autocomplete="tel" placeholder="55 1234 5678" value="${esc(cli.t)}"></label>
-    <div><div class="cf-l">Forma de pago</div><div class="pay">${Object.entries(PAY).map(([k,l])=>`<button type="button" data-pay="${k}" aria-pressed="${cli.p===k}">${k==='tarjeta'?'Tarjeta*':'Transferencia'}</button>`).join('')}</div><div style="font-size:12.5px;color:#55585e;margin-top:6px">💳 Tarjeta o transferencia, <b>al mismo precio</b>.</div></div>
+    <div><div class="cf-l">Forma de pago</div><div class="pay">${Object.entries(PAY).map(([k,l])=>`<button type="button" data-pay="${k}" aria-pressed="${cli.p===k}">${k==='tarjeta'?'Tarjeta':'Transferencia'}</button>`).join('')}</div></div>
     ${entregaHTML('data-urg')}
   </div><a class="wa" id="wa-go" target="_blank" rel="noopener">${WA_ICON}<span></span></a><div class="miss" id="cf-miss" aria-live="polite"></div><div id="solo-out"></div>`;
 }
@@ -893,11 +893,11 @@ function renderCart(){
     <div class="cf"><div class="lbl">Tus datos para el pedido</div>
       <label>Nombre<input id="cc-n" type="text" autocomplete="name" placeholder="Nombre y apellido" value="${esc(cli.n)}"></label>
       <label>Teléfono (WhatsApp)<input id="cc-t" type="tel" inputmode="tel" autocomplete="tel" placeholder="55 1234 5678" value="${esc(cli.t)}"></label>
-      <div><div class="cf-l">Forma de pago</div><div class="pay">${Object.keys(PAY).map(k=>`<button type="button" data-cpay="${k}" aria-pressed="${cli.p===k}">${k==='tarjeta'?'Tarjeta*':'Transferencia'}</button>`).join('')}</div><div style="font-size:12.5px;color:#55585e;margin-top:6px">💳 Tarjeta o transferencia, <b>al mismo precio</b>.</div></div>
+      <div><div class="cf-l">Forma de pago</div><div class="pay">${Object.keys(PAY).map(k=>`<button type="button" data-cpay="${k}" aria-pressed="${cli.p===k}">${k==='tarjeta'?'Tarjeta':'Transferencia'}</button>`).join('')}</div></div>
       ${entregaHTML('data-curg')}
     </div>
     <div style="font-size:13px;color:#55585e;margin:2px 0 10px">🛍️ <b>Solo pick-up</b> · por ahora no tenemos envío a domicilio</div>
-    <div class="tot"><div class="r"><span>Subtotal · ${n} pieza${n>1?'s':''}</span><span>${money2(sub)}</span></div>${urg?`<div class="r"><span>Entrega urgente (1 día hábil)</span><span>+ ${money2(urg)}</span></div>`:''}<div class="r big"><span>Total</span><b>${money2(tot)}</b></div>${cli.p==='tarjeta'?'<div style="font-size:12px;color:#6b6e75;margin-top:6px">*Aplican restricciones al pagar con tarjeta.</div>':''}</div>
+    <div class="tot"><div class="r"><span>Subtotal · ${n} pieza${n>1?'s':''}</span><span>${money2(sub)}</span></div>${urg?`<div class="r"><span>Entrega urgente (1 día hábil)</span><span>+ ${money2(urg)}</span></div>`:''}<div class="r big"><span>Total</span><b>${money2(tot)}</b></div></div>
     <a class="wa" id="cart-go" target="_blank" rel="noopener">${WA_ICON}<span>Enviar pedido por WhatsApp</span></a><div class="miss" id="cart-miss" aria-live="polite"></div><div id="order-out"></div>
     <div class="pv-note">Te contestamos con la liga de pago (tarjeta) o los datos para transferencia. Tu pedido queda apartado al recibir el pago completo. Lista a partir de 3 días hábiles. Sin devoluciones, solo cambios de talla. <a href="#politicas">Ver políticas</a></div>
     <button type="button" class="linkbtn" id="cart-clear">${clearArm?'¿Seguro? Toca otra vez para vaciar':'Vaciar carrito'}</button>`
